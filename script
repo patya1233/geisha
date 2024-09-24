@@ -1,0 +1,341 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Fack HUB", HidePremium = false,  Introtext = "Fack HUB", SaveConfig = true, ConfigFolder = "Fack HUB"})
+
+OrionLib:MakeNotification({
+	Name = "hey",
+	Content = "I thed it for the first just",
+	Image = "rbxassetid://4483345998",
+	TimeTime
+	})
+
+local fackTab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+	})
+
+fackTab:AddButton({
+	Name = "Full Brightness",
+	Callback = function()
+			-- สคริปต์นี้จะทำให้เห็นชัดในที่มืด (Fulbright)
+
+local lighting = game:GetService("Lighting")
+
+-- ตั้งค่าให้เป็น Fulbright
+lighting.Ambient = Color3.fromRGB(255, 255, 255) -- ทำให้ทุกอย่างสว่าง
+lighting.Brightness = 10 -- เพิ่มความสว่างโดยรวม
+lighting.GlobalShadows = false -- ปิดเงาทั้งหมด
+lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255) -- ทำให้ข้างนอกสว่าง
+
+print("Fulbright mode activated")
+  	end  
+	})
+
+local fackTab = Window:MakeTab({
+	Name = "chapter1",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+	})
+
+local Section = fackTab:AddSection({
+	Name = "house"
+})
+
+fackTab:AddButton({
+	Name = "tp to key",
+	Callback = function()
+-- ฟังก์ชันวาร์ปตัวละครของผู้เล่นไปยังตำแหน่งของ HouseKey
+local function warpToHouseKey(player)
+    -- ตรวจสอบว่าใน Workspace มีโฟลเดอร์ HouseKeys หรือไม่
+    local houseKeysFolder = game.Workspace:FindFirstChild("HouseKeys")
+    
+    if houseKeysFolder and houseKeysFolder:IsA("Folder") then
+        -- ตรวจสอบว่าในโฟลเดอร์ HouseKeys มีเครื่องมือชื่อ HouseKey หรือไม่
+        local houseKeyTool = houseKeysFolder:FindFirstChild("HouseKey")
+        
+        if houseKeyTool and houseKeyTool:IsA("Tool") then
+            -- ตรวจสอบว่าตัวละครของผู้เล่นมีอยู่ในเกมหรือไม่
+            local character = player.Character
+            if character and character:FindFirstChild("HumanoidRootPart") then
+                -- วาร์ปตัวละครไปยังตำแหน่งของ HouseKey
+                character.HumanoidRootPart.CFrame = houseKeyTool.Handle.CFrame
+                print("วาร์ปไปยังตำแหน่งของ HouseKey สำเร็จ!")
+            else
+                print("ไม่พบตัวละครของผู้เล่นหรือ HumanoidRootPart")
+            end
+        else
+            print("ไม่พบเครื่องมือ HouseKey ในโฟลเดอร์ HouseKeys")
+        end
+    else
+        print("ไม่พบโฟลเดอร์ HouseKeys ใน Workspace")
+    end
+end
+
+-- เรียกใช้ฟังก์ชันวาร์ปตัวละครของผู้เล่น (ในที่นี้เราสมมติว่าผู้เล่นเป็น LocalPlayer)
+local player = game.Players.LocalPlayer
+warpToHouseKey(player)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "tp house",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1682.05383, 9.82813072, -233.029099, 0.0901612639, 0, 0.995927274, 0, 1, 0, -0.995927274, 0, 0.0901612639)
+  	end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "TekeTeke"
+})
+
+fackTab:AddButton({
+	Name = "tp to note1",
+	Callback = function()
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoidRootPart = character.HumanoidRootPart
+
+-- ตั้งค่าตำแหน่งใหม่ (ในที่นี้เพิ่ม 50 หน่วยในแนว Y)
+local newYPosition = humanoidRootPart.Position.Y + 5
+
+-- สร้าง CFrame ใหม่
+humanoidRootPart.CFrame = CFrame.new(-1855.37756, newYPosition, -274.651489, 0.66819644, 0, 0.743984878, 0, 1, 0, -0.743984878, 0, 0.66819644)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to note2",
+	Callback = function()
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoidRootPart = character.HumanoidRootPart
+
+-- ตั้งค่าตำแหน่งใหม่ (ในที่นี้เพิ่ม 50 หน่วยในแนว Y)
+local newYPosition = humanoidRootPart.Position.Y + 5
+
+-- สร้าง CFrame ใหม่
+humanoidRootPart.CFrame = CFrame.new(-1858.08508, newYPosition, -327.219727, -0.60580945, 0, 0.795609713, 0, 1, 0, -0.795609713, 0, -0.60580945)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to note3",
+	Callback = function()
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoidRootPart = character.HumanoidRootPart
+
+-- ตั้งค่าตำแหน่งใหม่ (ในที่นี้เพิ่ม 50 หน่วยในแนว Y)
+local newYPosition = humanoidRootPart.Position.Y + 5
+
+-- สร้าง CFrame ใหม่
+humanoidRootPart.CFrame = CFrame.new(-1824.55347, newYPosition, -224.585327, 0.991014242, 0, 0.133756593, 0, 1, 0, -0.133756593, 0, 0.991014242)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to note4",
+	Callback = function()
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoidRootPart = character.HumanoidRootPart
+
+-- ตั้งค่าตำแหน่งใหม่ (ในที่นี้เพิ่ม 50 หน่วยในแนว Y)
+local newYPosition = humanoidRootPart.Position.Y + 5
+
+-- สร้าง CFrame ใหม่
+humanoidRootPart.CFrame = CFrame.new(-1826.24072, newYPosition, -294.055267, 0.284595668, -0, -0.958647668, 0, 1, -0, 0.958647668, 0, 0.284595668)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to note5",
+	Callback = function()
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoidRootPart = character.HumanoidRootPart
+
+-- ตั้งค่าตำแหน่งใหม่ (ในที่นี้เพิ่ม 50 หน่วยในแนว Y)
+local newYPosition = humanoidRootPart.Position.Y + 5
+
+-- สร้าง CFrame ใหม่
+humanoidRootPart.CFrame = CFrame.new(-1835.32458, newYPosition, -400.508148, 0.186447322, -0, -0.982464969, 0, 1, -0, 0.982464969, 0, 0.186447322)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to save",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1822.3811, 10.0377102, -264.010345, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to exit",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1890.98828, 19.3746185, -381.82486, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+  	end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "Maze"
+})
+
+fackTab:AddButton({
+	Name = "Iron cage1",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2811.41943, 93.5035629, -3.97819638, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "Iron cage2",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2826.26416, 93.5035629, -216.628815, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+    end
+    })
+
+fackTab:AddButton({
+	Name = "Iron cage3",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2728.12573, 93.5035629, -117.712303, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "Iron cage4",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2684.9624, 93.5035629, -3.92093849, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+  	end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "key cage"
+})
+
+fackTab:AddButton({
+	Name = "key1",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2702.31958, 86.3152771, 45.1631165, 0.954748929, 0.280760169, 0.0981233716, -3.81872769e-06, -0.329911411, 0.944011927, 0.297412962, -0.901294768, -0.31498149)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "key2",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2852.44653, 86.2065277, 3.99448705, -0.413802087, 0.894043267, 0.171622902, -3.54890813e-06, -0.18852216, 0.982068896, 0.910366893, 0.406381518, 0.0780140385)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "key3",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2920.06812, 86.3714066, -17.4962826, -0.445434779, 0.823239028, 0.351945132, 3.1700431e-06, -0.393095195, 0.919497848, 0.895314455, 0.409577399, 0.175095677)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "key4",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2926.03955, 86.2406616, -196.758194, 0.921057701, 0.37841785, 0.0919384882, -1.12033058e-06, -0.236084491, 0.971732557, 0.389426231, -0.895021856, -0.217447013)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "key5",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2830.80493, 86.2402725, -171.563354, -0.921289325, -0.377933443, -0.0916093215, 3.51745052e-06, -0.235581622, 0.971854508, -0.388877809, 0.89535892, 0.217040166)
+  	end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "ESP"
+})
+
+fackTab:AddButton({
+	Name = "esp TekeTeke",
+	Callback = function()
+local folderName = "TekeTeke"
+local modelName = "TekeTeke"
+
+local folder = game.Workspace:FindFirstChild(folderName)
+if folder and folder:IsA("Folder") then
+    print("โฟลเดอร์ 'TekeTeke' พบใน Workspace")
+
+    local model = folder:FindFirstChild(modelName)
+    if model and model:IsA("Model") then
+        print("พบ Model 'TekeTeke' ในโฟลเดอร์ 'TekeTeke'")
+        
+        -- ตรวจสอบว่ามี Humanoid ใน Model หรือไม่
+        local humanoid = model:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            print("พบ Humanoid ใน Model 'TekeTeke'")
+
+            -- สร้าง Highlight ใหม่
+            local highlight = Instance.new("Highlight")
+            highlight.Adornee = humanoid.Parent -- ทำให้ Highlight แสดงที่ตัว Model ของ Humanoid
+            highlight.FillColor = Color3.new(255, 0, 0) -- สีเขียว (RGB: 0, 255, 0)
+            highlight.Parent = model -- วาง Highlight ลงใน Model
+
+            print("สร้าง Highlight สีเขียวให้กับ Humanoid สำเร็จ")
+        else
+            print("ไม่พบ Humanoid ใน Model")
+        end
+    else
+        print("ไม่พบ Model 'TekeTeke' ในโฟลเดอร์")
+    end
+else
+    print("ไม่พบโฟลเดอร์ 'TekeTeke' ใน Workspace")
+			end
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "esp note",
+	Callback = function()
+			-- ตรวจสอบโฟลเดอร์ CodeLocations ใน Workspace
+local codeLocationsFolder = workspace:FindFirstChild("CodeLocations")
+
+-- ตรวจสอบว่าโฟลเดอร์ CodeLocations มีอยู่หรือไม่
+if codeLocationsFolder then
+    -- ตรวจสอบและทำการไฮไลท์ Note ทั้ง 5 อัน
+    local noteCount = 0
+    for _, item in pairs(codeLocationsFolder:GetChildren()) do
+        if item.Name == "Note" then
+            -- ทำการไฮไลท์เป็นสีม่วง (Color3.fromRGB(128, 0, 128) คือสีม่วง)
+            local highlight = Instance.new("Highlight")
+            highlight.Parent = item
+            highlight.FillColor = Color3.fromRGB(0, 255, 0)
+            highlight.OutlineColor = Color3.fromRGB(0, 255, 0)
+            noteCount = noteCount + 1
+
+            -- หากครบ 5 Note แล้วให้หยุดทำงาน
+            if noteCount == 5 then
+                break
+            end
+        end
+    end
+    
+    -- ตรวจสอบว่าเจอ Note ครบ 5 ไฟล์หรือไม่
+    if noteCount < 5 then
+        print("พบ Note เพียง " .. noteCount .. " ไฟล์ใน CodeLocations")
+    else
+        print("ทำการไฮไลท์ Note ทั้ง 5 อันเรียบร้อยแล้ว")
+    end
+else
+    print("ไม่พบโฟลเดอร์ CodeLocations ใน Workspace")
+			end
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "esp zombie",
+	Callback = function()
+        print ("fackkkk hahahaha")
+  	end  
+	})
+
+
+
+OrionLib:Init()
