@@ -39,7 +39,7 @@ local fackTab = Window:MakeTab({
 	})
 
 local Section = fackTab:AddSection({
-	Name = "house"
+	Name = "village"
 })
 
 fackTab:AddButton({
@@ -79,7 +79,7 @@ warpToHouseKey(player)
 	})
 
 fackTab:AddButton({
-	Name = "tp house",
+	Name = "tp to village",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1682.05383, 9.82813072, -233.029099, 0.0901612639, 0, 0.995927274, 0, 1, 0, -0.995927274, 0, 0.0901612639)
   	end  
