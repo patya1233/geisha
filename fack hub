@@ -33,7 +33,7 @@ print("Fulbright mode activated")
 	})
 
 local fackTab = Window:MakeTab({
-	Name = "chapter1",
+	Name = "chapter1 part 1",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 	})
