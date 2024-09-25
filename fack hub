@@ -696,4 +696,54 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(32.42323
         end  
 	})
 
+local fackTab = Window:MakeTab({
+	Name = "chapter2 part1",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+	})
+
+local Section = fackTab:AddSection({
+	Name = "village"
+})
+
+fackTab:AddButton({
+	Name = "tp to code (จำโค้ดให้ดีมีเวลาให้จำ10วิ)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-491.106964, 6.49094009, 518.335388, 0.899119556, -8.79632367e-10, -0.437703133, -1.5711763e-09, 1, -5.23712895e-09, 0.437703133, 5.39651346e-09, 0.899119556)
+wait(10)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-482.916931, 6.12442303, 374.461761, 0.939784288, 2.90276549e-08, 0.341768235, -1.46786929e-08, 1, -4.45707009e-08, -0.341768235, 3.68701336e-08, 0.939784288)
+wait(10)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-439.352539, 5.4580698, 513.954041, -0.214821607, 4.57578508e-08, 0.976653278, -5.83990767e-09, 1, -4.81362115e-08, -0.976653278, -1.60442628e-08, -0.214821607)
+wait(10)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-558.362244, 5.83181858, 492.233551, 0.951260746, -3.57368748e-08, 0.308387607, 1.71571042e-08, 1, 6.29597068e-08, -0.308387607, -5.46000614e-08, 0.951260746)
+wait(10)
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-535.85022, 5.3583889, 422.977356, 0.815015554, 3.94404367e-08, -0.579439104, 9.96416372e-09, 1, 8.20817689e-08, 0.579439104, -7.26715399e-08, 0.815015554)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to save",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-462.285614, 5.01364994, 445.786316, -0.0193826184, -1.89924538e-08, 0.999812126, 5.68486103e-09, 1, 1.91062313e-08, -0.999812126, 6.05412165e-09, -0.0193826184)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to exit",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-588.304138, 5.01071405, 552.414307, -0.69557333, -4.07036325e-08, 0.718455136, 2.23345378e-08, 1, 7.82775942e-08, -0.718455136, 7.04941741e-08, -0.69557333)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "auto win (ผ่านง่ายแต่ไม่หนุก)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-584.04834, 4.94417906, 682.348083, -0.793357849, 3.61368571e-08, -0.608755589, 2.98601215e-08, 1, 2.04467803e-08, 0.608755589, -1.95590322e-09, -0.793357849)
+        end  
+	})
+
 OrionLib:Init()
