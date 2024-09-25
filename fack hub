@@ -707,6 +707,13 @@ local Section = fackTab:AddSection({
 })
 
 fackTab:AddButton({
+	Name = "tp to village",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-412.154297, 5.01365089, 423.3237, -0.473892331, -4.68062531e-08, 0.880582809, 3.35826442e-08, 1, 7.12264807e-08, -0.880582809, 6.33259774e-08, -0.473892331)
+        end  
+	})
+
+fackTab:AddButton({
 	Name = "tp to code (จำโค้ดให้ดีมีเวลาให้จำ10วิ)",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-491.106964, 6.49094009, 518.335388, 0.899119556, -8.79632367e-10, -0.437703133, -1.5711763e-09, 1, -5.23712895e-09, 0.437703133, 5.39651346e-09, 0.899119556)
@@ -742,7 +749,18 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-588.304
 fackTab:AddButton({
 	Name = "auto win (ผ่านง่ายแต่ไม่หนุก)",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-584.04834, 4.94417906, 682.348083, -0.793357849, 3.61368571e-08, -0.608755589, 2.98601215e-08, 1, 2.04467803e-08, 0.608755589, -1.95590322e-09, -0.793357849)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-599.306152, 4.99802589, 653.754944, -0.943247914, -3.98600548e-08, -0.332089365, -7.93827226e-09, 1, -9.74806795e-08, 0.332089365, -8.93122305e-08, -0.943247914)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "Wooden bridge"
+})
+
+fackTab:AddButton({
+	Name = "tp to brifge",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-285.990692, 7.67232323, 825.345093, -0.997199059, -1.6786645e-08, -0.0747931376, -6.84608725e-09, 1, -1.33163724e-07, 0.0747931376, -1.322787e-07, -0.997199059)
         end  
 	})
 
