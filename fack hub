@@ -474,4 +474,15 @@ end
     end
     })
 
+local Section = fackTab:AddSection({
+	Name = "auto win (อย่าใช้เลยมันจะไม่หนุก)"
+})
+
+fackTab:AddButton({
+	Name = "auto win",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2945.95288, 91.6969452, -186.961273, 0.355538905, 0, 0.934661448, 0, 1, 0, -0.934661448, 0, 0.355538905)
+        end  
+	})
+
 OrionLib:Init()
