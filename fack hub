@@ -80,7 +80,7 @@ warpToHouseKey(player)
 
 fackTab:AddButton({
 	Name = "tp village",
-	Callback = function()         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1682.05383, 9.82813072, -233.029099, 0.0901612639, 0, 0.995927274, 0, 1, 0, -0.995927274, 0, 0.0901612639)
+	Callback = function()         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1642.04846, 13.5136156, -234.773758, -0.991117418, -0.132065713, -0.0156545844, -2.25748463e-05, -0.117545143, 0.993067622, -0.132990301, 0.98424685, 0.116498061)
     end  
     })
 
@@ -289,6 +289,24 @@ else
             end
   	end  
 	})
+
+local Section = fackTab:AddSection({
+	Name = "Neko"
+})
+
+fackTab:AddButton({
+	Name = "tp to Neko",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2785.42261, 92.5951233, -135.354599, 0.39013359, -0.859469593, -0.330314726, -0.000243720773, -0.358838439, 0.933399737, -0.920758307, -0.364070088, -0.140204415)
+    end
+    })
+
+fackTab:AddButton({
+	Name = "tp to Exit Maze",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2934.27197, 92.3119354, -180.786118, 0.228647545, -0.966748059, -0.114535637, 0.00025664948, -0.117592469, 0.9930619, -0.973509192, -0.227090582, -0.0266391169)
+    end
+    })
 
 local Section = fackTab:AddSection({
 	Name = "ESP"
