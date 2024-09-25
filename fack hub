@@ -199,7 +199,7 @@ else
     print("ไม่พบโฟลเดอร์ AxePosition ใน Workspace")
 end
         end
-        )}
+        })
 
 fackTab:AddButton({
 	Name = "tp to save",
