@@ -220,6 +220,13 @@ local Section = fackTab:AddSection({
 })
 
 fackTab:AddButton({
+	Name = "tp to Maze",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2499.9873, 74.3114624, -36.0809212, -0.0157057047, 0.0208586045, 0.999659061, -0.0411492363, 0.998921871, -0.0214897245, -0.999029517, -0.0414727181, -0.0148304701)
+  	end  
+	})
+
+fackTab:AddButton({
 	Name = "Iron cage1",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2811.41943, 93.5035629, -3.97819638, 0, 0, -1, 0, 1, 0, 1, 0, 0)
