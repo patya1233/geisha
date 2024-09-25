@@ -166,43 +166,46 @@ humanoidRootPart.CFrame = CFrame.new(-1835.32458, newYPosition, -400.508148, 0.1
 fackTab:AddButton({
 	Name = "tp to axe",
 	Callback = function()
--- ตรวจสอบว่าใน Workspace มีโฟลเดอร์ AxePosition หรือไม่
-local axeFolder = game.Workspace:FindFirstChild("AxePosition")
+-- ตรวจสอบว่าโฟลเดอร์ AxePosition มีอยู่ใน Workspace หรือไม่
+local axePositionFolder = game.Workspace:FindFirstChild("AxePosition")
 
-if axeFolder then
-    -- ค้นหา tool ที่ชื่อ Axe ในโฟลเดอร์ end  local axeTool = axeFolder:FindFirstChild("Axe")
+if axePositionFolder then
+    -- ตรวจสอบว่ามี Tool ชื่อ Axe อยู่ในโฟลเดอร์ AxePosition หรือไม่
+    local axeTool = axePositionFolder:FindFirstChild("Axe")
+    
+    if axeTool and axeTool:IsA("Tool") then
+        -- ตรวจสอบว่ามี Handle อยู่ใน Tool ชื่อ Axe หรือไม่
+        local handle = axeTool:FindFirstChild("Handle")
+        
+        if handle then
+            print("พบ Handle ใน Tool ชื่อ Axe")
 
-    if axeTool then
-        print("พบ Tool ชื่อ Axe")
+            -- รับตัวละครของผู้เล่น
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
 
-        -- วาร์ปตัวละครของผู้เล่นไปยังตำแหน่งของ Axe โดยใช้ CFrame
-        -- อ้างอิงผู้เล่นที่ทำการเรียกใช้สคริปต์นี้ (กรณี LocalScript)
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
+            -- คำนวณตำแหน่งใหม่ โดยเพิ่ม 5 หน่วยในแกน Y
+            local newPosition = handle.CFrame + Vector3.new(0, 5, 0)
 
-        -- ตรวจสอบว่าตัวละครของผู้เล่นมีส่วนของ HumanoidRootPart เพื่อเปลี่ยนตำแหน่งหรือไม่
-        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-
-        if humanoidRootPart then
-            -- วาร์ปตัวละครไปยังตำแหน่งของ Axe แต่เพิ่มแกน Y ขึ้นเล็กน้อย (เช่น 5 หน่วย)
-            humanoidRootPart.CFrame = axeTool.Handle.CFrame + Vector3.new(0, 5, 0)
+            -- วาปตัวละครไปยังตำแหน่งที่คำนวณ
+            character:SetPrimaryPartCFrame(newPosition)
         else
-            print("ไม่พบ HumanoidRootPart ในตัวละคร")
+            print("ไม่พบ Handle ใน Tool ชื่อ Axe")
         end
     else
         print("ไม่พบ Tool ชื่อ Axe ในโฟลเดอร์ AxePosition")
     end
 else
     print("ไม่พบโฟลเดอร์ AxePosition ใน Workspace")
-            end
-  	end  
-	})
+end
+        end
+        )}
 
 fackTab:AddButton({
 	Name = "tp to save",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1822.3811, 10.0377102, -264.010345, -1, 0, 0, 0, 1, 0, 0, 0, -1)
-  	end  
+        end  
 	})
 
 fackTab:AddButton({
@@ -451,7 +454,7 @@ if cageKeyFolder then
             local highlight = Instance.new("Highlight")
             highlight.Parent = item
             highlight.FillColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
-            highlight.OutlineColor = Color3.fromRGB(0, 0, 0) -- สีขอบดำ
+            highlight.OutlineColor = Color3.fromRGB(0, 255, 0) -- สีขอบดำ
 
             -- ถ้าครบ 5 อันแล้ว ให้ออกจากลูป
             if count >= 5 then
