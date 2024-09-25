@@ -388,6 +388,10 @@ else
   	end  
 	})
 
+local Section = fackTab:AddSection({
+	Name = "ESP Neko"
+})
+
 fackTab:AddButton({
 	Name = "esp zombie",
 	Callback = function()
@@ -425,6 +429,46 @@ end
   	end    
 })
 
+fackTab:AddButton({
+	Name = "esp key Maze",
+	Callback = function()
+-- กำหนดโฟลเดอร์ที่ต้องการตรวจสอบ
+local cageKeyFolder = workspace:FindFirstChild("CageKeyLocations")
 
+-- ตรวจสอบว่ามีโฟลเดอร์นี้หรือไม่
+if cageKeyFolder then
+    print("Found CageKeyLocations Folder!")
+
+    -- นับจำนวน CageKey ที่พบ
+    local count = 0
+
+    -- ลูปผ่านทุกอย่างในโฟลเดอร์
+    for _, item in pairs(cageKeyFolder:GetChildren()) do
+        if item:IsA("Tool") and item.Name == "CageKey" then
+            count = count + 1
+            
+            -- สร้าง Highlight และตั้งค่าสีเขียว
+            local highlight = Instance.new("Highlight")
+            highlight.Parent = item
+            highlight.FillColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
+            highlight.OutlineColor = Color3.fromRGB(0, 0, 0) -- สีขอบดำ
+
+            -- ถ้าครบ 5 อันแล้ว ให้ออกจากลูป
+            if count >= 5 then
+                break
+            end
+        end
+    end
+
+    if count == 0 then
+        print("No CageKey tools found in CageKeyLocations.")
+    else
+        print("Added highlights to " .. count .. " CageKey tools.")
+    end
+else
+    print("CageKeyLocations folder not found in Workspace.")
+end
+    end
+    })
 
 OrionLib:Init()
