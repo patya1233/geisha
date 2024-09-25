@@ -388,12 +388,13 @@ else
   	end  
 	})
 
-fackTab:AddButton({
-	Name = "esp zombie",
-	Callback = function()
-        print ("fackkkk hahahaha")
-  	end  
-	})
+fackTab:AddToggle({
+	Name = "This is a toggle!",
+	Default = false,
+	Callback = function(Value)
+		print(fackkkkk)
+	end    
+})
 
 
 
