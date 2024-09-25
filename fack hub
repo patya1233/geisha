@@ -518,7 +518,7 @@ end
     })
 
 local Section = fackTab:AddSection({
-	Name = "auto win (อย่าใช้เลยมันจะไม่หนุก)"
+	Name = "auto win (อย่าใช้เลยมันจะไม่หนุก กดครั้งเดียวผ่าน)"
 })
 
 fackTab:AddButton({
@@ -570,7 +570,126 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-364.816
         end  
 	})
 
+fackTab:AddButton({
+	Name = "tp to chest",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-87.3182297, 11.529274, -586.107849, 0.00828082301, 1.00101296e-07, 0.999965727, 2.08115836e-08, 1, -1.0027707e-07, -0.999965727, 2.1641247e-08, 0.00828082301)
+        end  
+	})
 
+fackTab:AddButton({
+	Name = "tp to Marble stand",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-67.9663925, 15.6777334, -432.875946, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end  
+	})
 
+fackTab:AddButton({
+	Name = "tp to exit",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-33.056469, 11.5980244, -180.54155, -0.999986112, 5.43947714e-08, -0.0052646175, 5.43681828e-08, 1, 5.19337817e-09, 0.0052646175, 4.9070783e-09, -0.999986112)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "ไม่รู้ชื่อเดียวค่อยมาแก้"
+})
+
+fackTab:AddButton({
+	Name = "tp to chest1",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(301.923553, 8.99802589, -12.7699394, -0.00843780767, 3.87678156e-08, -0.999964416, 5.07742897e-08, 1, 3.83407546e-08, 0.999964416, -5.04489712e-08, -0.00843780767)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to chest2",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(198.888855, 9.16990089, 48.022831, -0.787722766, -1.32476146e-08, -0.616029859, 4.14674624e-08, 1, -7.45296305e-08, 0.616029859, -8.42538839e-08, -0.787722766)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to chest3",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-286.22998, 11.6699009, -13.1981936, 0.0740906, 5.41575318e-08, 0.997251511, 5.88700111e-09, 1, -5.47441665e-08, -0.997251511, 9.92684868e-09, 0.0740906)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to chest4",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-139.394135, 11.6699009, -60.2276917, -0.0476490147, -1.41991965e-08, 0.998864114, -9.89701689e-08, 1, 9.49414947e-09, -0.998864114, -9.84053656e-08, -0.0476490147)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to Complete Mirror",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-25.2290077, 11.6699009, 58.6506386, -0.998561502, 2.12094537e-08, 0.0536184274, 1.78060127e-08, 1, -6.39529318e-08, -0.0536184274, -6.290621e-08, -0.998561502)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to จำชื่อไม่ได้แต่เป็นผี",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(23.9305649, 8.5957737, 367.322052, -0.99863261, -3.19285611e-08, -0.0522777885, -3.17546522e-08, 1, -4.15722301e-09, 0.0522777885, -2.49147525e-09, -0.99863261)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to exit",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(32.4232368, 10.065589, 898.137268, -0.982517004, -2.92382367e-08, 0.186172783, -4.62938097e-08, 1, -8.72642048e-08, -0.186172783, -9.43572118e-08, -0.982517004)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "ESP"
+})
+
+fackTab:AddButton({
+	Name = "esp Gashadokuro",
+	Callback = function()
+-- สคริปต์เพื่อตรวจสอบไฟล์ใน Workspace ในโมเดลชื่อ Gashadokuro และเพิ่ม Highlight สีแดงให้กับ Humanoid
+
+-- ค้นหาโมเดล Gashadokuro ใน Workspace
+local model = workspace:FindFirstChild("Gashadokuro")
+
+-- ตรวจสอบว่าพบโมเดลหรือไม่
+if model then
+    print("พบโมเดล Gashadokuro")
+
+    -- ตรวจสอบว่ามี Humanoid อยู่ในโมเดลหรือไม่
+    for _, item in pairs(model:GetChildren()) do
+        if item:IsA("Humanoid") then
+            print("พบ Humanoid:", item.Name)
+
+            -- สร้าง Highlight และตั้งค่า
+            local highlight = Instance.new("Highlight")
+            highlight.Parent = item.Parent -- Parent เป็นโมเดลที่มี Humanoid
+            highlight.FillColor = Color3.new(1, 0, 0) -- สีแดง (RGB: 1, 0, 0)
+            highlight.OutlineColor = Color3.new(1, 0, 0) -- สีแดง (สำหรับเส้นขอบ)
+            highlight.Enabled = true
+
+            print("เพิ่ม Highlight สีแดงให้กับ Humanoid")
+        end
+    end
+else
+    print("ไม่พบโมเดล Gashadokuro ใน Workspace")
+end
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "auto win (อย่าใช้เลยเดี๋ยวไม่หนุก กดครั้งเดียวผ่าน)"
+})
+
+fackTab:AddButton({
+	Name = "auto win",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(32.4232368, 10.065589, 898.137268, -0.982517004, -2.92382367e-08, 0.186172783, -4.62938097e-08, 1, -8.72642048e-08, -0.186172783, -9.43572118e-08, -0.982517004)
+        end  
+	})
 
 OrionLib:Init()
