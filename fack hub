@@ -749,7 +749,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-588.304
 fackTab:AddButton({
 	Name = "auto win (ผ่านง่ายแต่ไม่หนุก)",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-599.306152, 4.99802589, 653.754944, -0.943247914, -3.98600548e-08, -0.332089365, -7.93827226e-09, 1, -9.74806795e-08, 0.332089365, -8.93122305e-08, -0.943247914)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-620.314758, 4.99802494, 607.368286, -0.963574111, -3.49710092e-08, -0.267441541, -3.8066915e-08, 1, 6.39125064e-09, 0.267441541, 1.63391185e-08, -0.963574111)
         end  
 	})
 
