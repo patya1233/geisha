@@ -592,7 +592,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-33.0564
 	})
 
 local Section = fackTab:AddSection({
-	Name = "ไม่รู้ชื่อเดียวค่อยมาแก้"
+	Name = "Kushisakke Onna"
 })
 
 fackTab:AddButton({
@@ -630,8 +630,12 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-25.2290
         end  
 	})
 
+local Section = fackTab:AddSection({
+	Name = "Kushisakke Onna boss"
+})
+
 fackTab:AddButton({
-	Name = "tp to จำชื่อไม่ได้แต่เป็นผี",
+	Name = "tp to Kushisakke Onna",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(23.9305649, 8.5957737, 367.322052, -0.99863261, -3.19285611e-08, -0.0522777885, -3.17546522e-08, 1, -4.15722301e-09, 0.0522777885, -2.49147525e-09, -0.99863261)
         end  
