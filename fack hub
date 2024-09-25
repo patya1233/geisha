@@ -398,39 +398,43 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "esp zombie",
 	Callback = function()
-        -- ตรวจสอบว่ามีโฟลเดอร์ Monsters อยู่ใน Workspace หรือไม่
-local monstersFolder = workspace:FindFirstChild("Monsters")
+        while true do
+    -- ตรวจสอบว่ามีโฟลเดอร์ Monsters อยู่ใน Workspace หรือไม่
+    local monstersFolder = workspace:FindFirstChild("Monsters")
 
-if monstersFolder then
-    print("พบโฟลเดอร์ Monsters ใน Workspace")
+    if monstersFolder then
+        print("พบโฟลเดอร์ Monsters ใน Workspace")
 
-    -- วนลูปตรวจสอบโมเดลในโฟลเดอร์ Monsters
-    for _, model in ipairs(monstersFolder:GetChildren()) do
-        if model:IsA("Model") then
-            -- ตรวจสอบว่าโมเดลนั้นมี Humanoid หรือไม่
-            local humanoid = model:FindFirstChild("Humanoid")
-            
-            if humanoid then
-                print("โมเดล " .. model.Name .. " มี Humanoid")
+        -- วนลูปตรวจสอบโมเดลในโฟลเดอร์ Monsters
+        for _, model in ipairs(monstersFolder:GetChildren()) do
+            if model:IsA("Model") then
+                -- ตรวจสอบว่าโมเดลนั้นมี Humanoid หรือไม่
+                local humanoid = model:FindFirstChild("Humanoid")
+                
+                if humanoid then
+                    print("โมเดล " .. model.Name .. " มี Humanoid")
 
-                -- สร้าง Highlight ใหม่
-                local highlight = Instance.new("Highlight")
-                highlight.Parent = model
-                highlight.FillTransparency = 1 -- ทำให้ด้านในโปร่งใสทั้งหมด
-                highlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- ตั้งค่าสีเส้นขอบเป็นสีแดง
-                highlight.OutlineTransparency = 0 -- เส้นขอบไม่โปร่งใส
+                    -- สร้าง Highlight ใหม่
+                    local highlight = Instance.new("Highlight")
+                    highlight.Parent = model
+                    highlight.FillTransparency = 1 -- ทำให้ด้านในโปร่งใสทั้งหมด
+                    highlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- ตั้งค่าสีเส้นขอบเป็นสีแดง
+                    highlight.OutlineTransparency = 0 -- เส้นขอบไม่โปร่งใส
+                else
+                    print("โมเดล " .. model.Name .. " ไม่มี Humanoid")
+                end
             else
-                print("โมเดล " .. model.Name .. " ไม่มี Humanoid")
+                print(model.Name .. " ไม่ใช่โมเดล")
             end
-        else
-            print(model.Name .. " ไม่ใช่โมเดล")
         end
+    else
+        print("ไม่พบโฟลเดอร์ Monsters ใน Workspace")
     end
-else
-    print("ไม่พบโฟลเดอร์ Monsters ใน Workspace")
+
+    wait(5) -- หยุด 5 วินาทีก่อนที่จะวนลูปใหม่
 end
   	end    
-})
+        })
 
 fackTab:AddButton({
 	Name = "esp key Maze",
