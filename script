@@ -79,11 +79,10 @@ warpToHouseKey(player)
 	})
 
 fackTab:AddButton({
-	Name = "tp to village",
-	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1682.05383, 9.82813072, -233.029099, 0.0901612639, 0, 0.995927274, 0, 1, 0, -0.995927274, 0, 0.0901612639)
-  	end  
-	})
+	Name = "tp village",
+	Callback = function()         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1682.05383, 9.82813072, -233.029099, 0.0901612639, 0, 0.995927274, 0, 1, 0, -0.995927274, 0, 0.0901612639)
+    end  
+    })
 
 local Section = fackTab:AddSection({
 	Name = "TekeTeke"
@@ -161,6 +160,42 @@ local newYPosition = humanoidRootPart.Position.Y + 5
 
 -- สร้าง CFrame ใหม่
 humanoidRootPart.CFrame = CFrame.new(-1835.32458, newYPosition, -400.508148, 0.186447322, -0, -0.982464969, 0, 1, -0, 0.982464969, 0, 0.186447322)
+  	end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to axe",
+	Callback = function()
+-- ตรวจสอบว่าใน Workspace มีโฟลเดอร์ AxePosition หรือไม่
+local axeFolder = game.Workspace:FindFirstChild("AxePosition")
+
+if axeFolder then
+    -- ค้นหา tool ที่ชื่อ Axe ในโฟลเดอร์ AxePosition
+    local axeTool = axeFolder:FindFirstChild("Axe")
+
+    if axeTool then
+        print("พบ Tool ชื่อ Axe")
+
+        -- วาร์ปตัวละครของผู้เล่นไปยังตำแหน่งของ Axe โดยใช้ CFrame
+        -- อ้างอิงผู้เล่นที่ทำการเรียกใช้สคริปต์นี้ (กรณี LocalScript)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+
+        -- ตรวจสอบว่าตัวละครของผู้เล่นมีส่วนของ HumanoidRootPart เพื่อเปลี่ยนตำแหน่งหรือไม่
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+        if humanoidRootPart then
+            -- วาร์ปตัวละครไปยังตำแหน่งของ Axe แต่เพิ่มแกน Y ขึ้นเล็กน้อย (เช่น 5 หน่วย)
+            humanoidRootPart.CFrame = axeTool.Handle.CFrame + Vector3.new(0, 5, 0)
+        else
+            print("ไม่พบ HumanoidRootPart ในตัวละคร")
+        end
+    else
+        print("ไม่พบ Tool ชื่อ Axe ในโฟลเดอร์ AxePosition")
+    end
+else
+    print("ไม่พบโฟลเดอร์ AxePosition ใน Workspace")
+            end
   	end  
 	})
 
@@ -335,7 +370,5 @@ fackTab:AddButton({
         print ("fackkkk hahahaha")
   	end  
 	})
-
-
 
 OrionLib:Init()
