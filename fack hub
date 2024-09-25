@@ -398,6 +398,42 @@ else
   	end  
 	})
 
+fackTab:AddButton({
+	Name = "esp axe",
+	Callback = function()
+-- ตรวจสอบว่ามีโฟลเดอร์ AxePosition อยู่ใน Workspace หรือไม่
+local axePositionFolder = workspace:FindFirstChild("AxePosition")
+
+if axePositionFolder then
+    -- ค้นหา tool ชื่อ Axe ในโฟลเดอร์ AxePosition
+    local axeTool = axePositionFolder:FindFirstChild("Axe")
+    
+    if axeTool and axeTool:IsA("Tool") then
+        print("พบ Tool: Axe")
+        
+        -- ตรวจสอบว่ามี Highlight อยู่แล้วหรือไม่
+        local existingHighlight = axeTool:FindFirstChildOfClass("Highlight")
+        
+        if not existingHighlight then
+            -- ถ้ายังไม่มี Highlight ให้สร้างใหม่
+            local highlight = Instance.new("Highlight")
+            highlight.Parent = axeTool
+            highlight.FillColor = Color3.fromRGB(128, 0, 128) -- สีม่วง
+            highlight.OutlineColor = Color3.fromRGB(128, 0, 128) -- เส้นขอบสีม่วงเช่นกัน
+            
+            print("Highlight สีม่วงถูกเพิ่มลงใน Axe")
+        else
+            print("Axe มี Highlight อยู่แล้ว")
+        end
+    else
+        print("ไม่พบ tool ชื่อ Axe ในโฟลเดอร์ AxePosition")
+    end
+else
+    print("ไม่พบโฟลเดอร์ AxePosition ใน Workspace")
+end
+    end
+    })
+
 local Section = fackTab:AddSection({
 	Name = "ESP Neko"
 })
