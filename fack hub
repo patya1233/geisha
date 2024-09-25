@@ -33,7 +33,7 @@ print("Fulbright mode activated")
 	})
 
 local fackTab = Window:MakeTab({
-	Name = "chapter1 part 1",
+	Name = "chapter1 part1",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 	})
@@ -527,5 +527,50 @@ fackTab:AddButton({
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2945.95288, 91.6969452, -186.961273, 0.355538905, 0, 0.934661448, 0, 1, 0, -0.934661448, 0, 0.355538905)
         end  
 	})
+
+local fackTab = Window:MakeTab({
+	Name = "chapter1 part2",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+	})
+
+local Section = fackTab:AddSection({
+	Name = "house"
+})
+
+fackTab:AddButton({
+	Name = "tp to key",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-115.229256, 19.6125565, -964.665833, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to door",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108.695091, 18.5917645, -935.360535, -0.999464095, 8.89990126e-09, -0.0327339619, 8.43254622e-09, 1, 1.44154289e-08, 0.0327339619, 1.41316736e-08, -0.999464095)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "Gashadokuro"
+})
+
+fackTab:AddButton({
+	Name = "tp to code",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(163.146454, 11.5292759, -551.791504, 0.988024175, 7.49239533e-08, -0.154299319, -7.52331104e-08, 1, 3.83554521e-09, 0.154299319, 7.81880605e-09, 0.988024175)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to save",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-364.816223, 11.5292759, -524.326294, -0.107877932, -1.27482238e-08, 0.994164169, 1.94876559e-09, 1, 1.30345201e-08, -0.994164169, 3.3435299e-09, -0.107877932)
+        end  
+	})
+
+
+
 
 OrionLib:Init()
