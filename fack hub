@@ -760,7 +760,14 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "tp to brifge",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-285.990692, 7.67232323, 825.345093, -0.997199059, -1.6786645e-08, -0.0747931376, -6.84608725e-09, 1, -1.33163724e-07, 0.0747931376, -1.322787e-07, -0.997199059)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-346.602142, 4.99802494, 767.511108, -0.946439505, 2.71118807e-08, 0.322881341, -1.42319294e-08, 1, -1.25685617e-07, -0.322881341, -1.23549057e-07, -0.946439505)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "auto win (ผ่านง่ายแต่ไม่หนุก)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-274.451843, 8.99802589, 1294.22229, -0.994992316, -4.57239357e-09, 0.0999512002, -4.02574613e-10, 1, 4.17387156e-08, -0.0999512002, 4.14894643e-08, -0.994992316)
         end  
 	})
 
