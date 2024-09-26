@@ -993,4 +993,51 @@ end
         end  
 	})
 
+local Section = fackTab:AddSection({
+	Name = "esp Mansion"
+})
+
+fackTab:AddButton({
+	Name = "esp Geisha",
+	Callback = function()
+-- สคริปต์เพิ่ม Highlights ให้กับ Humanoid ในโมเดล Geisha ภายในโฟลเดอร์ Mansion
+
+local workspace = game:GetService("Workspace") -- เข้าถึง Workspace
+
+-- ฟังก์ชันสำหรับเพิ่ม Highlight ให้กับ Humanoid
+local function addHighlightToHumanoid()
+    local mansionFolder = workspace:FindFirstChild("Mansion") -- ตรวจสอบว่าโฟลเดอร์ Mansion มีอยู่ใน Workspace
+
+    if mansionFolder then
+        local geishaModel = mansionFolder:FindFirstChild("Geisha") -- ตรวจสอบว่าโมเดล Geisha มีอยู่ในโฟลเดอร์ Mansion
+
+        if geishaModel then
+            local humanoid = geishaModel:FindFirstChildOfClass("Humanoid") -- ค้นหา Humanoid ในโมเดล
+
+            if humanoid then
+                -- สร้าง Highlight
+                local highlight = Instance.new("Highlight")
+                highlight.Name = "Highlight"
+                highlight.Parent = geishaModel -- เพิ่ม Highlight ลงในโมเดล Geisha
+                highlight.FillColor = Color3.fromRGB(255, 200, 200) -- สีแดงอ่อน
+                highlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- สีแดง
+                highlight.OutlineTransparency = 0 -- ไม่โปร่งใส
+
+                print("เพิ่ม Highlight ให้กับ Humanoid ในโมเดล Geisha")
+            else
+                print("ไม่พบ Humanoid ในโมเดล Geisha")
+            end
+        else
+            print("ไม่พบโมเดล Geisha ในโฟลเดอร์ Mansion")
+        end
+    else
+        print("ไม่พบโฟลเดอร์ Mansion ใน Workspace")
+    end
+end
+
+-- เรียกใช้ฟังก์ชัน
+addHighlightToHumanoid()
+        end  
+	})
+
 OrionLib:Init()
