@@ -760,14 +760,235 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "tp to brifge",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-346.602142, 4.99802494, 767.511108, -0.946439505, 2.71118807e-08, 0.322881341, -1.42319294e-08, 1, -1.25685617e-07, -0.322881341, -1.23549057e-07, -0.946439505)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-372.370819, 4.99802494, 759.297424, -0.939708829, 5.74142156e-09, -0.3419756, 1.30510838e-08, 1, -1.90738678e-08, 0.3419756, -2.23870344e-08, -0.939708829)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "auto get Wooden board",
+	Callback = function()
+-- ค้นหาโฟลเดอร์ Missing_Planks
+local folder = game.Workspace:FindFirstChild("GAME")
+if folder then
+    folder = folder:FindFirstChild("Bridge")
+end
+
+if folder then
+    folder = folder:FindFirstChild("Missing_Planks")
+end
+
+-- ฟังก์ชันตรวจสอบระยะห่างระหว่างผู้เล่นกับ MeshPart
+local function checkPlayerProximity(meshPart, proximityPrompt)
+    -- ระยะที่ผู้เล่นจะต้องเข้าใกล้เพื่อให้ ProximityPrompt ทำงาน
+    local activationDistance = proximityPrompt.MaxActivationDistance or 10
+
+    -- รับตำแหน่งของ MeshPart
+    local partPosition = meshPart.Position
+
+    -- ใช้การตรวจสอบทุกๆ 0.1 วินาที
+    game:GetService("RunService").Heartbeat:Connect(function()
+        -- วนผ่านผู้เล่นทุกคนในเกม
+        for _, player in pairs(game.Players:GetPlayers()) do
+            -- ตรวจสอบว่าผู้เล่นมีตัวละคร (Character) และหัวของตัวละครหรือไม่
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                -- คำนวณระยะห่างระหว่างผู้เล่นกับ MeshPart
+                local distance = (player.Character.HumanoidRootPart.Position - partPosition).Magnitude
+
+                -- ถ้าผู้เล่นอยู่ในระยะห่างที่กำหนด ให้ทำงาน ProximityPrompt
+                if distance <= activationDistance then
+                    print(player.Name .. " อยู่ใกล้ ProximityPrompt ใน " .. meshPart.Name)
+                    proximityPrompt:InputHoldBegin(player)  -- จำลองการเริ่มใช้งาน
+                    proximityPrompt:InputHoldEnd()          -- จำลองการใช้งานเสร็จสิ้น
+                end
+            end
+        end
+    end)
+end
+
+-- ถ้าเจอโฟลเดอร์ Missing_Planks
+if folder then
+    local meshParts = {} -- ตารางเก็บ MeshPart ทั้งหมด
+    -- ลูปผ่านทุก MeshPart ในโฟลเดอร์
+    for _, object in pairs(folder:GetChildren()) do
+        -- ตรวจสอบว่า object เป็น MeshPart หรือไม่
+        if object:IsA("MeshPart") then
+            table.insert(meshParts, object) -- เก็บ MeshPart ไว้ในตาราง
+            -- พิมพ์ชื่อและชนิดของ object
+            print("ชื่อไฟล์: " .. object.Name)
+            print("ชนิดไฟล์: " .. object.ClassName)
+        end
+    end
+    
+    -- ตรวจสอบว่าเจอ MeshPart 5 ไฟล์หรือไม่
+    if #meshParts == 5 then
+        -- ตรวจสอบ ProximityPrompt ใน MeshPart ทั้ง 5
+        for _, meshPart in pairs(meshParts) do
+            print("ตรวจสอบ ProximityPrompt ใน: " .. meshPart.Name)
+            -- ลูปผ่าน children ของ MeshPart นั้น
+            for _, child in pairs(meshPart:GetChildren()) do
+                -- ถ้า child เป็น ProximityPrompt
+                if child:IsA("ProximityPrompt") then
+                    print("พบ ProximityPrompt ใน: " .. meshPart.Name)
+                    -- เรียกฟังก์ชันตรวจสอบระยะห่าง
+                    checkPlayerProximity(meshPart, child)
+                end
+            end
+        end
+    else
+        print("ไม่พบ MeshPart จำนวน 5 ไฟล์ พบจำนวน: " .. #meshParts)
+    end
+else
+    print("ไม่พบโฟลเดอร์ Missing_Planks")
+end
+
+local teleportPositions = {
+    CFrame.new(-332.582214, -9.32113171, 845.324097, 0.748804569, -0.00512214098, -0.662771046, 4.38541174e-05, 0.999970496, -0.0076785963, 0.662790835, 0.00572070293, 0.748782694),
+    CFrame.new(-364.05246, -13.5821476, 955.13678, -0.922638535, 0.0335934088, 0.384200066, 0.134648234, 0.961570382, 0.239274383, -0.361397356, 0.272495627, -0.891705275),
+    CFrame.new(-289.560211, -13.7935181, 973.419373, -0.969013214, -0.222248673, -0.107796617, -1.43945217e-05, 0.436454177, -0.899726629, 0.247011304, -0.871844888, -0.422933459),
+    CFrame.new(-202.645218, -10.1677856, 926.130493, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+    CFrame.new(-137.15065, -12.2946472, 995.029419, 0.668829739, -0.0699151605, -0.740120709, 0.0338233113, 0.997398734, -0.0636534765, 0.7426458, 0.017540006, 0.669454694),
+    CFrame.new(-285.89035, 7.24921989, 941.409241, -0.999997437, 8.26647053e-08, 0.0022661488, 8.25150011e-08, 1, -6.61547688e-08, -0.0022661488, -6.59676118e-08, -0.999997437)
+}
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local function teleportToPosition(position)
+    humanoidRootPart.CFrame = position
+    -- ทำให้กล้องหันลงไปที่พื้น โดยปรับมุม Pitch ลงไปที่ -90 องศา (หันลง)
+    local cameraPosition = workspace.CurrentCamera.CFrame.Position
+    local lookDownPosition = cameraPosition + Vector3.new(0, -1, 0) -- กล้องหันลง
+    workspace.CurrentCamera.CFrame = CFrame.new(cameraPosition, lookDownPosition)
+end
+
+for _, position in ipairs(teleportPositions) do
+    teleportToPosition(position)
+    wait(0.5)  -- รอ 1 วินาทีก่อนวาร์ปไปตำแหน่งต่อไป
+end
         end  
 	})
 
 fackTab:AddButton({
 	Name = "auto win (ผ่านง่ายแต่ไม่หนุก)",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-274.451843, 8.99802589, 1294.22229, -0.994992316, -4.57239357e-09, 0.0999512002, -4.02574613e-10, 1, 4.17387156e-08, -0.0999512002, 4.14894643e-08, -0.994992316)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-272.238251, 8.99802589, 1250.83948, -0.995614469, -3.52820262e-09, -0.0935514644, -1.82609172e-09, 1, -1.82799837e-08, 0.0935514644, -1.80289828e-08, -0.995614469)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "Old village"
+})
+
+fackTab:AddButton({
+	Name = "tp to Old village",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-272.238251, 8.99802589, 1250.83948, -0.995614469, -3.52820262e-09, -0.0935514644, -1.82609172e-09, 1, -1.82799837e-08, 0.0935514644, -1.80289828e-08, -0.995614469)
+        end  
+	})
+
+fackTab:AddButton({Name = "tp to key",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-344.968079, 9.78138924, 1471.17896, 0.301202416, -2.02846735e-08, -0.953560233, 6.38632613e-08, 1, -1.09998788e-09, 0.953560233, -6.05661512e-08, 0.301202416)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to Mansion",
+	Callback = function()
+print (fack hahahahaha)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "esp Wooden bridge"
+})
+
+fackTab:AddButton({
+	Name = "esp fish and Wooden board",
+	Callback = function()
+-- ฟังก์ชันสำหรับการเพิ่ม Highlight สีแดงให้กับ Humanoid พร้อมโปร่งใส่
+local function addHighlightToHumanoid(model)
+    -- ค้นหา Humanoid ในโมเดล
+    local humanoid = model:FindFirstChildOfClass("Humanoid")
+    
+    if humanoid then
+        -- สร้าง Highlight
+        local highlight = Instance.new("Highlight")
+        highlight.Parent = model
+        highlight.FillColor = Color3.new(1, 0, 0) -- สีแดง (RGB: 1, 0, 0)
+        highlight.FillTransparency = 0.5 -- ปรับความโปร่งใส่ (0 = ทึบ, 1 = โปร่งใส่เต็มที่)
+        
+        print("เพิ่ม Highlight ให้กับ Humanoid ใน " .. model.Name)
+    else
+        print("ไม่พบ Humanoid ใน " .. model.Name)
+    end
+end
+
+-- ตรวจสอบว่า Fish1 มีหรือไม่
+local fish1 = workspace:FindFirstChild("Fish1")
+if fish1 then
+    addHighlightToHumanoid(fish1)
+else
+    print("ไม่พบ Fish1 ใน Workspace")
+end
+
+-- ตรวจสอบว่า Fish2 มีหรือไม่
+local fish2 = workspace:FindFirstChild("Fish2")
+if fish2 then
+    addHighlightToHumanoid(fish2)
+else
+    print("ไม่พบ Fish2 ใน Workspace")
+end
+
+-- ตรวจสอบว่าใน Workspace มีโฟลเดอร์ GAME หรือไม่
+local gameFolder = workspace:FindFirstChild("GAME")
+
+if gameFolder then
+    print("พบโฟลเดอร์ 'GAME'")
+    
+    -- ตรวจสอบว่าในโฟลเดอร์ GAME มีโฟลเดอร์ Bridge หรือไม่
+    local bridgeFolder = gameFolder:FindFirstChild("Bridge")
+    
+    if bridgeFolder then
+        print("พบโฟลเดอร์ 'Bridge'")
+        
+        -- ตรวจสอบว่าในโฟลเดอร์ Bridge มีโฟลเดอร์ Missing_Planks หรือไม่
+        local missingPlanksFolder = bridgeFolder:FindFirstChild("Missing_Planks")
+        
+        if missingPlanksFolder then
+            print("พบโฟลเดอร์ 'Missing_Planks'")
+            
+            -- ตรวจสอบว่าในโฟลเดอร์ Missing_Planks มี MeshPart บ้างหรือไม่
+            local meshPartCount = 0
+            for _, item in ipairs(missingPlanksFolder:GetChildren()) do
+                if item:IsA("MeshPart") then
+                    meshPartCount = meshPartCount + 1
+                    print("พบ MeshPart: " .. item.Name)
+
+                    -- เพิ่ม Highlight ให้กับ MeshPart
+                    local highlight = Instance.new("Highlight")
+                    highlight.Adornee = item
+                    highlight.FillTransparency = 1 -- ทำให้ข้างในโปร่งใส
+                    highlight.OutlineColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
+                    highlight.Parent = item
+                end
+            end
+            
+            if meshPartCount == 0 then
+                print("ไม่พบ MeshPart ใน 'Missing_Planks'")
+            else
+                print("พบทั้งหมด " .. meshPartCount .. " MeshPart ใน 'Missing_Planks'")
+            end
+        else
+            print("ไม่พบโฟลเดอร์ 'Missing_Planks'")
+        end
+    else
+        print("ไม่พบโฟลเดอร์ 'Bridge'")
+    end
+else
+    print("ไม่พบโฟลเดอร์ 'GAME'")
+end
         end  
 	})
 
