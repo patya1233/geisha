@@ -894,6 +894,10 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-344.968
         end  
 	})
 
+local Section = fackTab:AddSection({
+	Name = "Mansion"
+})
+
 fackTab:AddButton({
 	Name = "tp to Mansion",
 	Callback = function()
