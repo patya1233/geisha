@@ -1728,25 +1728,6 @@ end
 -- เรียกใช้ฟังก์ชัน
 checkProximityPrompt()
 
-local cframes = {
-    CFrame.new(202.780289, 19.1468887, 533.058411, -8.10623169e-05, -8.10623169e-05, -1, 1, 8.10623169e-05, -8.10623169e-05, 8.10623169e-05, -1, 8.10623169e-05),
-    CFrame.new(166.69162, 13.2479706, 387.669952, -8.10623169e-05, -8.10623169e-05, -1, 1, 8.10623169e-05, -8.10623169e-05, 8.10623169e-05, -1, 8.10623169e-05),
-    CFrame.new(160.444794, 12.6603041, 358.1073, 0, 0, -1, 1, 0, 0, 0, -1, 0),
-    CFrame.new(118.743401, 10.3231602, 410.781952, -8.10623169e-05, -8.10623169e-05, -1, 1, 8.10623169e-05, -8.10623169e-05, 8.10623169e-05, -1, 8.10623169e-05),
-    CFrame.new(74.1786423, 19.8490887, 315.185333, -8.10623169e-05, -8.10623169e-05, -1, 1, 8.10623169e-05, -8.10623169e-05, 8.10623169e-05, -1, 8.10623169e-05)
-}
-
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-local camera = workspace.CurrentCamera
-
-for _, cframe in ipairs(cframes) do
-    humanoidRootPart.CFrame = cframe + Vector3.new(0, 3, 0) -- เพิ่มความสูง 5 หน่วย
-    camera.CFrame = CFrame.new(humanoidRootPart.Position, humanoidRootPart.Position - Vector3.new(0, 1, 0)) -- หันกล้องลงพื้น
-    wait(1) -- รอ 1 วินาที ก่อนวาร์ปไปยังตำแหน่งถัดไป
-end
-
 -- สร้างฟังก์ชันเพื่อจำลองการกด ProximityPrompt
 local function simulateProximityPrompt(prompt)
     if prompt then
