@@ -709,7 +709,7 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "tp to village",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-412.154297, 5.01365089, 423.3237, -0.473892331, -4.68062531e-08, 0.880582809, 3.35826442e-08, 1, 7.12264807e-08, -0.880582809, 6.33259774e-08, -0.473892331)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-371.493866, 5.01364994, 409.453186, -0.331973583, 2.3490669e-08, 0.943288684, -3.67979389e-08, 1, -3.78533258e-08, -0.943288684, -4.7277382e-08, -0.331973583)
         end  
 	})
 
@@ -749,7 +749,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-588.304
 fackTab:AddButton({
 	Name = "auto win (ผ่านง่ายแต่ไม่หนุก)",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-620.314758, 4.99802494, 607.368286, -0.963574111, -3.49710092e-08, -0.267441541, -3.8066915e-08, 1, 6.39125064e-09, 0.267441541, 1.63391185e-08, -0.963574111)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-611.52417, 4.99802494, 641.881897, -0.829633355, -4.46592496e-09, -0.558308542, -8.64017391e-09, 1, 4.84006879e-09, 0.558308542, 8.83936568e-09, -0.829633355)
         end  
 	})
 
@@ -872,7 +872,7 @@ end
 fackTab:AddButton({
 	Name = "auto win (ผ่านง่ายแต่ไม่หนุก)",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-272.238251, 8.99802589, 1250.83948, -0.995614469, -3.52820262e-09, -0.0935514644, -1.82609172e-09, 1, -1.82799837e-08, 0.0935514644, -1.80289828e-08, -0.995614469)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-271.94046, 8.99802399, 1276.6947, -0.995817125, -4.87019207e-08, 0.0913689584, -4.05828651e-08, 1, 9.07180322e-08, -0.0913689584, 8.6630557e-08, -0.995817125)
         end  
 	})
 
@@ -883,7 +883,7 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "tp to Old village",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-272.238251, 8.99802589, 1250.83948, -0.995614469, -3.52820262e-09, -0.0935514644, -1.82609172e-09, 1, -1.82799837e-08, 0.0935514644, -1.80289828e-08, -0.995614469)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-271.94046, 8.99802399, 1276.6947, -0.995817125, -4.87019207e-08, 0.0913689584, -4.05828651e-08, 1, 9.07180322e-08, -0.0913689584, 8.6630557e-08, -0.995817125)
         end  
 	})
 
@@ -901,6 +901,9 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "tp to Mansion",
 	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-272.781433, 8.99802399, 1625.83044, -0.91821301, -6.24143297e-08, 0.396086961, -5.15255216e-08, 1, 3.81303238e-08, -0.396086961, 1.46031711e-08, -0.91821301)
+wait(10)
+
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-331.572784, 11.1231651, 1818.82666, -0.999845684, -5.10139175e-09, -0.0175659452, -6.76188661e-09, 1, 9.44698115e-08, 0.0175659452, 9.45740126e-08, -0.999845684)
         end  
 	})
