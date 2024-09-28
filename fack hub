@@ -1767,16 +1767,6 @@ while true do
             print("No object found with name:", sickleName)
         end
     end
-    
-    -- หากวัตถุทั้งหมดถูกลบออกแล้ว ให้ออกจากลูป
-    if allRemoved then
-        print("All Sickle objects have been removed.")
-        break
-    end
-    
-    -- รอเล็กน้อยก่อนที่จะวนลูปใหม่
-    wait(0)
-end
 
 local cframes = {
     CFrame.new(202.780289, 19.1468887, 533.058411, -8.10623169e-05, -8.10623169e-05, -1, 1, 8.10623169e-05, -8.10623169e-05, 8.10623169e-05, -1, 8.10623169e-05),
@@ -1796,6 +1786,17 @@ for _, cframe in ipairs(cframes) do
     camera.CFrame = CFrame.new(humanoidRootPart.Position, humanoidRootPart.Position - Vector3.new(0, 1, 0)) -- หันกล้องลงพื้น
     wait(1) -- รอ 1 วินาที ก่อนวาร์ปไปยังตำแหน่งถัดไป
 end
+
+    -- หากวัตถุทั้งหมดถูกลบออกแล้ว ให้ออกจากลูป
+    if allRemoved then
+        print("All Sickle objects have been removed.")
+        break
+    end
+    
+    -- รอเล็กน้อยก่อนที่จะวนลูปใหม่
+    wait(0)
+end
+
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.2287636, 12.9980259, 403.747498, 0.999955833, 1.79942159e-08, -0.00939891022, -1.86687537e-08, 1, -7.16799633e-08, 0.00939891022, 7.18522628e-08, 0.999955833)
         end  
 	})
@@ -1897,9 +1898,9 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
 	})
 
 fackTab:AddButton({
-	Name = "tp to exit (ใช้งานไม่ได้)",
+	Name = "tp to exit",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-246.528229, 12.9980259, -556.101807, -0.0216634255, 1.57485704e-08, -0.999765337, -2.87889232e-08, 1, 1.63760809e-08, 0.999765337, 2.91369293e-08, -0.0216634255)
         end  
 	})
 
