@@ -1728,6 +1728,56 @@ end
 -- เรียกใช้ฟังก์ชัน
 checkProximityPrompt()
 
+-- สร้างฟังก์ชันเพื่อจำลองการกด ProximityPrompt
+local function simulateProximityPrompt(prompt)
+    if prompt then
+        print("Simulating ProximityPrompt for:", prompt.Parent.Name)
+        -- จำลองการเริ่มการกด ProximityPrompt
+        prompt:InputHoldBegin()
+        -- จำลองการหยุดการกด ProximityPrompt
+        prompt:InputHoldEnd()
+    end
+end
+
+-- รายการชื่อของ Sickle1 ถึง Sickle5
+local sickleList = {"Sickle1", "Sickle2", "Sickle3", "Sickle4", "Sickle5"}
+
+-- ตรวจสอบการมีอยู่ของ Sickle1 ถึง Sickle5 ใน workspace จนกว่าทั้งหมดจะถูกลบ
+while true do
+    local allRemoved = true -- ตัวแปรเพื่อตรวจสอบว่าทั้งหมดถูกลบแล้วหรือไม่
+
+    -- วนลูปผ่านแต่ละ Sickle ในรายการ
+    for _, sickleName in pairs(sickleList) do
+        -- ค้นหาวัตถุใน workspace
+        local sickle = workspace:FindFirstChild(sickleName)
+        
+        -- หากพบวัตถุ
+        if sickle then
+            allRemoved = false -- อย่างน้อยมีวัตถุหนึ่งยังอยู่
+            -- ค้นหา ProximityPrompt ภายในวัตถุ
+            local proximityPrompt = sickle:FindFirstChildOfClass("ProximityPrompt")
+            
+            -- ถ้ามี ProximityPrompt ให้เรียกฟังก์ชันจำลองการกด
+            if proximityPrompt then
+                simulateProximityPrompt(proximityPrompt)
+            else
+                print("No ProximityPrompt found in:", sickleName)
+            end
+        else
+            print("No object found with name:", sickleName)
+        end
+    end
+    
+    -- หากวัตถุทั้งหมดถูกลบออกแล้ว ให้ออกจากลูป
+    if allRemoved then
+        print("All Sickle objects have been removed.")
+        break
+    end
+    
+    -- รอเล็กน้อยก่อนที่จะวนลูปใหม่
+    wait(0)
+end
+
 local cframes = {
     CFrame.new(202.780289, 19.1468887, 533.058411, -8.10623169e-05, -8.10623169e-05, -1, 1, 8.10623169e-05, -8.10623169e-05, 8.10623169e-05, -1, 8.10623169e-05),
     CFrame.new(166.69162, 13.2479706, 387.669952, -8.10623169e-05, -8.10623169e-05, -1, 1, 8.10623169e-05, -8.10623169e-05, 8.10623169e-05, -1, 8.10623169e-05),
@@ -1741,46 +1791,10 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local camera = workspace.CurrentCamera
 
--- ฟังก์ชันในการตรวจสอบ ProximityPrompt
-local function triggerProximityPrompt(proximityPrompt)
-    if proximityPrompt then
-        -- จำลองการกดปุ่ม
-        proximityPrompt:InputHoldBegin()
-        proximityPrompt:InputHoldEnd()
-    end
-end
-
--- ฟังก์ชันในการทำงานซ้ำจนกว่า Sickle ทั้งหมดจะหมด
-local function triggerProximityPromptLoop()
-    for i = 1, 5 do
-        local sickleName = "Sickle" .. i
-        local sickle = workspace:FindFirstChild(sickleName)
-
-        if sickle then
-            local proximityPrompt = sickle:FindFirstChildOfClass("ProximityPrompt")
-
-            if proximityPrompt then
-                -- จำลองการกดปุ่ม
-                triggerProximityPrompt(proximityPrompt)
-                wait(0.5) -- รอเวลาสั้นๆ เพื่อให้ prompt ทำงาน
-            else
-                print("ไม่พบ ProximityPrompt ใน " .. sickleName)
-            end
-        else
-            print("ไม่พบ " .. sickleName .. " ใน Workspace")
-        end
-    end
-end
-
--- วาร์ปไปยังทุก CFrame และตรวจสอบ ProximityPrompt
 for _, cframe in ipairs(cframes) do
-    humanoidRootPart.CFrame = cframe + Vector3.new(0, 5, 0) -- เพิ่มความสูง 5 หน่วย
+    humanoidRootPart.CFrame = cframe + Vector3.new(0, 3, 0) -- เพิ่มความสูง 5 หน่วย
     camera.CFrame = CFrame.new(humanoidRootPart.Position, humanoidRootPart.Position - Vector3.new(0, 1, 0)) -- หันกล้องลงพื้น
-    
-    -- เรียกใช้ฟังก์ชัน triggerProximityPromptLoop หลังจากวาร์ปไปยังแต่ละตำแหน่ง
-    triggerProximityPromptLoop()
-
-    wait(1) -- รอ 1 วินาทีก่อนวาร์ปไปยังตำแหน่งถัดไป
+    wait(1) -- รอ 1 วินาที ก่อนวาร์ปไปยังตำแหน่งถัดไป
 end
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.2287636, 12.9980259, 403.747498, 0.999955833, 1.79942159e-08, -0.00939891022, -1.86687537e-08, 1, -7.16799633e-08, 0.00939891022, 7.18522628e-08, 0.999955833)
         end  
@@ -1790,6 +1804,434 @@ fackTab:AddButton({
 	Name = "tp to Sickle assembly",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.2287636, 12.9980259, 403.747498, 0.999955833, 1.79942159e-08, -0.00939891022, -1.86687537e-08, 1, -7.16799633e-08, 0.00939891022, 7.18522628e-08, 0.999955833)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = ""
+})
+
+fackTab:AddButton({
+	Name = "tp to Maze",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-620.807617, 12.9980259, 531.771118, -0.0404916666, -1.77118515e-08, 0.9991799, -5.29852073e-08, 1, 1.557917e-08, -0.9991799, -5.23109271e-08, -0.0404916666)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to Generators1",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-797.511597, 13.9980259, 597.600403, -0.999517977, 3.35753825e-08, -0.0310448296, 3.15968691e-08, 1, 6.42214815e-08, 0.0310448296, 6.32096047e-08, -0.999517977)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to Generators2",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-855.257812, 13.9980259, 638.865173, 0.724282146, 1.62344319e-10, -0.689503729, 1.21827854e-08, 1, 1.30327331e-08, 0.68950367, -1.78394526e-08, 0.724282086)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to Generators3",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-777.776794, 13.998024, 484.276245, 0.692034423, -6.67160123e-08, -0.721864522, 1.52087125e-08, 1, -7.78415554e-08, 0.721864522, 4.28904059e-08, 0.692034423)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to Generators4",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-699.113281, 13.998024, 455.981964, 0.468623996, -6.16817744e-08, -0.883397758, -4.8903253e-08, 1, -9.57654862e-08, 0.883397758, 8.80790267e-08, 0.468623996)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to exit",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-899.630066, 13.9980259, 554.282288, -0.0680072829, -9.68848042e-08, 0.997684836, 2.13657514e-09, 1, 9.7255267e-08, -0.997684836, 8.74569483e-09, -0.0680072829)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "auto win (อย่าใช้ไม่หนุก)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1207.56299, 11.8208179, 293.290833, 0.999689162, -7.33745642e-09, 0.0249311235, 7.76179032e-09, 1, -1.6923476e-08, -0.0249311235, 1.71117254e-08, 0.999689162)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "CAVE"
+})
+
+fackTab:AddButton({
+	Name = "tp to cave",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1207.56299, 11.8208179, 293.290833, 0.999689162, -7.33745642e-09, 0.0249311235, 7.76179032e-09, 1, -1.6923476e-08, -0.0249311235, 1.71117254e-08, 0.999689162)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Auto running",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1082.08801, 44.9416046, -231.578781, 0.838460565, 1.38908138e-08, -0.544962287, -7.48049178e-09, 1, 1.39802641e-08, 0.544962287, -7.64531372e-09, 0.838460565)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = ""
+})
+
+fackTab:AddButton({
+	Name = "tp to village",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-852.061829, 12.9980259, -591.602966, 0.619134128, -3.78732707e-08, -0.785285294, 1.28322428e-08, 1, -3.81114909e-08, 0.785285294, 1.35191529e-08, 0.619134128)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "auto get Key parts (ใช้งานไม่ได้)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to exit (ใช้งานไม่ได้)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "esp sickle"
+})
+
+fackTab:AddButton({
+	Name = "tp to village",
+	Callback = function()
+-- ฟังก์ชันตรวจสอบไฟล์ใน Workspace และจัดการ Highlights และ ESP Text
+local function checkForSickles()
+    for i = 1, 5 do
+        local sickleName = "Sickle" .. i
+        local sickle = workspace:FindFirstChild(sickleName)
+        
+        if sickle then
+            print(sickleName .. " exists in Workspace.")
+            
+            -- ตรวจสอบว่ามี Highlights อยู่หรือไม่
+            local existingHighlight = sickle:FindFirstChildOfClass("Highlight")
+            if existingHighlight then
+                -- ลบ Highlight อันเดิม
+                existingHighlight:Destroy()
+                print("Removed old highlight from " .. sickleName)
+            end
+            
+            -- สร้างและเพิ่ม Highlight ใหม่
+            local highlight = Instance.new("Highlight")
+            highlight.Parent = sickle
+            highlight.FillTransparency = 1 -- ทำให้ข้างในโปร่งใส
+            highlight.OutlineColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
+            highlight.OutlineTransparency = 0 -- เส้นขอบชัดเจน
+            
+            print("Added new highlight to " .. sickleName)
+
+            -- ตรวจสอบว่ามี BillboardGui อยู่แล้วหรือไม่ (ESP Text)
+            local existingBillboardGui = sickle:FindFirstChildOfClass("BillboardGui")
+            if existingBillboardGui then
+                -- ลบ BillboardGui อันเดิม
+                existingBillboardGui:Destroy()
+                print("Removed old ESP text from " .. sickleName)
+            end
+
+            -- สร้างและเพิ่ม BillboardGui สำหรับ ESP Text
+            local billboardGui = Instance.new("BillboardGui")
+            billboardGui.Parent = sickle
+            billboardGui.Adornee = sickle
+            billboardGui.Size = UDim2.new(0, 50, 0, 50) -- ขนาดของกล่องข้อความ
+            billboardGui.StudsOffset = Vector3.new(0, 3, 0) -- ระยะห่างจากวัตถุ (ยกสูง)
+            billboardGui.AlwaysOnTop = true -- ให้ข้อความอยู่บนสุดเสมอ
+
+            -- สร้าง TextLabel สำหรับแสดงชื่อไฟล์
+            local textLabel = Instance.new("TextLabel")
+            textLabel.Parent = billboardGui
+            textLabel.Size = UDim2.new(1, 0, 1, 0) -- ขนาดของ TextLabel
+            textLabel.BackgroundTransparency = 1 -- พื้นหลังโปร่งใส
+            textLabel.Text = sickleName -- แสดงชื่อไฟล์
+            textLabel.TextColor3 = Color3.new(0, 1, 0) -- สีขาว
+            textLabel.TextScaled = true -- ขยายข้อความให้พอดีกับกล่อง
+            
+            print("Added ESP text to " .. sickleName)
+        else
+            print(sickleName .. " does not exist in Workspace.")
+        end
+    end
+end
+
+-- เรียกใช้ฟังก์ชัน
+checkForSickles()
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "esp jorogumo"
+})
+
+fackTab:AddButton({
+	Name = "esp jorogumo",
+	Callback = function()
+local workspace = game:GetService("Workspace")
+local jorogumoAI = workspace:FindFirstChild("JorogumoAI")
+
+if jorogumoAI then
+    local dummy = jorogumoAI:FindFirstChild("Dummy")
+    
+    if dummy then
+        local jorogumo = dummy:FindFirstChild("Jorogumo")
+        
+        if jorogumo then
+            -- ลบ Highlight เดิมถ้ามี
+            local existingHighlight = jorogumo:FindFirstChildOfClass("Highlight")
+            if existingHighlight then
+                existingHighlight:Destroy()
+            end
+
+            -- เพิ่ม Highlight ใหม่
+            local highlight = Instance.new("Highlight")
+            highlight.Parent = jorogumo
+            highlight.Adornee = jorogumo
+            highlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- สีเขียว
+            highlight.FillColor = Color3.fromRGB(255, 0, 0) -- สีเขียว
+            highlight.Transparency = 0.5 -- ปรับความโปร่งใสได้ที่นี่
+
+            print("เพิ่ม Highlight สีเขียวให้กับ Jorogumo")
+        else
+            print("ไม่มีโมเดลชื่อ Jorogumo อยู่ใน Dummy")
+        end
+    else
+        print("ไม่พบโมเดล Dummy ใน JorogumoAI")
+    end
+else
+    print("ไม่พบโฟลเดอร์ JorogumoAI ใน Workspace")
+end
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "esp Generators and Closets",
+	Callback = function()
+-- รับโฟลเดอร์ Generators จาก Workspace
+local generatorsFolder = game.Workspace:FindFirstChild("Generators")
+
+-- ตรวจสอบว่าโฟลเดอร์ Generators มีอยู่หรือไม่
+if generatorsFolder then
+    -- วน loop ตรวจสอบ item ในโฟลเดอร์
+    for _, item in ipairs(generatorsFolder:GetChildren()) do
+        if item.Name == "Generator" and item:IsA("Model") then
+            -- ตรวจสอบและลบ Highlight ที่มีอยู่แล้ว
+            local existingHighlight = item:FindFirstChildOfClass("Highlight")
+            if existingHighlight then
+                existingHighlight:Destroy()
+            end
+            
+            -- สร้าง Highlight ใหม่
+            local highlight = Instance.new("Highlight")
+            highlight.Parent = item
+            highlight.FillColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
+            highlight.FillTransparency = 0.5 -- ปรับความโปร่งใส่
+            highlight.OutlineTransparency = 0 -- ความโปร่งใสของขอบ
+        end
+    end
+else
+    print("Generators folder not found in Workspace.")
+end
+
+-- ตรวจสอบว่าโฟลเดอร์ชื่อ Closets อยู่ใน Workspace หรือไม่
+local closetsFolder = game.Workspace:FindFirstChild("Closets")
+
+if closetsFolder and closetsFolder:IsA("Folder") then
+    -- วนลูปผ่านไฟล์ทั้งหมดในโฟลเดอร์
+    for _, item in ipairs(closetsFolder:GetChildren()) do
+        -- ตรวจสอบว่าไฟล์เป็น Model และมีชื่อว่า Closet หรือไม่
+        if item:IsA("Model") and string.match(item.Name, "Closet") then
+            -- ตรวจสอบว่ามี Highlights อยู่ใน Model หรือไม่ ถ้ามีให้ลบทิ้ง
+            local existingHighlight = item:FindFirstChildOfClass("Highlight")
+            if existingHighlight then
+                existingHighlight:Destroy()
+            end
+
+            -- สร้าง Highlights ใหม่
+            local highlight = Instance.new("Highlight")
+            highlight.Name = "Highlight"
+            highlight.Adornee = item  -- ตั้งให้ Highlight ทำงานกับ Model นี้
+            highlight.Parent = item  -- ตั้ง Parent ให้เป็น Model
+            highlight.FillColor = Color3.fromRGB(128, 0, 128)  -- สีด้านในโปร่งใส
+            highlight.FillTransparency = 0.5  -- ตั้งค่าความโปร่งใสเป็น 1 (เต็ม)
+            highlight.OutlineColor = Color3.fromRGB(128, 0, 128)  -- ตั้งสีขอบเป็นสีม่วง
+            highlight.OutlineTransparency = 0  -- ตั้งความโปร่งใสของเส้นขอบเป็น 0 (ไม่โปร่งใส)
+
+            print("เพิ่ม Highlights ให้กับ Model: " .. item.Name)
+        end
+    end
+else
+    print("ไม่พบโฟลเดอร์ชื่อ 'Closets' ใน Workspace")
+end
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "esp KeraOna"
+})
+
+fackTab:AddButton({
+	Name = "esp KeraOna",
+	Callback = function()
+local aiFolder = game.Workspace:FindFirstChild("AI")
+
+if aiFolder then
+    local keraOnaModel = aiFolder:FindFirstChild("KeraOna")
+    
+    if keraOnaModel then
+        -- ลบ Highlights อันเดิมถ้ามี
+        local existingHighlight = keraOnaModel:FindFirstChildOfClass("Highlight")
+        if existingHighlight then
+            existingHighlight:Destroy()
+        end
+        
+        -- สร้าง Highlights ใหม่
+        local newHighlight = Instance.new("Highlight")
+        newHighlight.Parent = keraOnaModel
+        newHighlight.FillColor = Color3.fromRGB(255, 0, 0) -- สีแดง
+        newHighlight.FillTransparency = 0.5 -- โปร่งใส 50%
+        newHighlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- สีแดง
+        newHighlight.OutlineTransparency = 0 -- ไม่มีความโปร่งใส
+        newHighlight.Adornee = keraOnaModel
+    else
+        print("ไม่พบโมเดล KeraOna ในโฟลเดอร์ AI")
+    end
+else
+    print("ไม่พบโฟลเดอร์ AI ใน Workspace")
+end
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "esp Key parts",
+	Callback = function()
+local keySpawnFolder = game.Workspace:FindFirstChild("KeySpawn")
+
+if keySpawnFolder then
+    -- ฟังก์ชันสำหรับสร้าง ESP Text
+    local function createESPText(part)
+        local espText = Instance.new("BillboardGui")
+        espText.Adornee = part
+        espText.Size = UDim2.new(0, 50, 0, 50)
+        espText.AlwaysOnTop = true
+        espText.ExtentsOffset = Vector3.new(0, 2, 0) -- ปรับตำแหน่งของข้อความ
+
+        local textLabel = Instance.new("TextLabel")
+        textLabel.Size = UDim2.new(0, 50, 0, 50)
+        textLabel.BackgroundTransparency = 1
+        textLabel.TextColor3 = Color3.fromRGB(0, 255, 0) -- สีเขียว
+        textLabel.TextScaled = true
+        textLabel.Text = part.Name -- ตั้งชื่อเป็นชื่อของ part
+
+        textLabel.Parent = espText
+        espText.Parent = part
+    end
+
+    -- ตรวจสอบใน Parts "Part1" ถึง "Part9"
+    for i = 1, 9 do
+        local partName = "Part" .. i
+        local part = keySpawnFolder:FindFirstChild(partName)
+        
+        if part then
+            print("พบ " .. partName .. " ในโฟลเดอร์ KeySpawn")
+            -- ตรวจสอบว่าใน Part นั้นมี KeyPart1 ถึง KeyPart9 อยู่หรือไม่
+            for j = 1, 9 do
+                local keyPartName = "KeyPart" .. j
+                local keyPart = part:FindFirstChild(keyPartName)
+
+                if keyPart then
+                    print("พบ " .. keyPartName .. " ใน " .. partName)
+
+                    -- ลบ Highlights อันเดิมถ้ามี
+                    local existingHighlight = keyPart:FindFirstChildOfClass("Highlight")
+                    if existingHighlight then
+                        existingHighlight:Destroy()
+                    end
+                    
+                    -- สร้าง Highlights ใหม่
+                    local newHighlight = Instance.new("Highlight")
+                    newHighlight.Parent = keyPart
+                    newHighlight.FillColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
+                    newHighlight.FillTransparency = 0.5 -- โปร่งใส 50%
+                    newHighlight.OutlineColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
+                    newHighlight.OutlineTransparency = 0 -- ไม่มีความโปร่งใส
+                    newHighlight.Adornee = keyPart
+
+                    -- ตรวจสอบและลบ ESP Text อันเก่า
+                    local existingESP = keyPart:FindFirstChildOfClass("BillboardGui")
+                    if existingESP then
+                        existingESP:Destroy()
+                    end
+
+                    -- เพิ่ม ESP Text ใหม่
+                    createESPText(keyPart)
+                else
+                    print("ไม่พบ " .. keyPartName .. " ใน " .. partName)
+                end
+            end
+        else
+            print("ไม่พบ " .. partName .. " ในโฟลเดอร์ KeySpawn")
+        end
+    end
+
+    -- ตรวจสอบใน Part ชื่อ "Part"
+    local mainPart = keySpawnFolder:FindFirstChild("Part")
+    if mainPart then
+        print("พบ Part ชื่อ 'Part' ในโฟลเดอร์ KeySpawn")
+        -- ตรวจสอบว่าใน Part นั้นมี KeyPart1 ถึง KeyPart9 อยู่หรือไม่
+        for j = 1, 9 do
+            local keyPartName = "KeyPart" .. j
+            local keyPart = mainPart:FindFirstChild(keyPartName)
+
+            if keyPart then
+                print("พบ " .. keyPartName .. " ใน Part ชื่อ 'Part'")
+
+                -- ลบ Highlights อันเดิมถ้ามี
+                local existingHighlight = keyPart:FindFirstChildOfClass("Highlight")
+                if existingHighlight then
+                    existingHighlight:Destroy()
+                end
+                
+                -- สร้าง Highlights ใหม่
+                local newHighlight = Instance.new("Highlight")
+                newHighlight.Parent = keyPart
+                newHighlight.FillColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
+                newHighlight.FillTransparency = 0.5 -- โปร่งใส 50%
+                newHighlight.OutlineColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
+                newHighlight.OutlineTransparency = 0 -- ไม่มีความโปร่งใส
+                newHighlight.Adornee = keyPart
+
+                -- ตรวจสอบและลบ ESP Text อันเก่า
+                local existingESP = keyPart:FindFirstChildOfClass("BillboardGui")
+                if existingESP then
+                    existingESP:Destroy()
+                end
+
+                -- เพิ่ม ESP Text ใหม่
+                createESPText(keyPart)
+            else
+                print("ไม่พบ " .. keyPartName .. " ใน Part ชื่อ 'Part'")
+            end
+        end
+    else
+        print("ไม่พบ Part ชื่อ 'Part' ในโฟลเดอร์ KeySpawn")
+    end
+else
+    print("ไม่พบโฟลเดอร์ KeySpawn ใน Workspace")
+end
         end  
 	})
 
