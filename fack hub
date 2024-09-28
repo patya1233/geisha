@@ -910,6 +910,62 @@ local Section = fackTab:AddSection({
 })
 
 fackTab:AddButton({
+	Name = "tp to save zone",
+	Callback = function()
+-- ตรวจสอบและลบ Part ที่มีชื่อ "fack hub" ถ้ามีอยู่
+local existingBlock = workspace:FindFirstChild("fack hub")
+if existingBlock then
+    existingBlock:Destroy()
+end
+
+-- สร้างบล็อกใหม่
+local block = Instance.new("Part")
+block.Name = "fack hub"
+block.Size = Vector3.new(10, 1, 10) -- ขนาด 10x1x10
+block.CFrame = CFrame.new(-296.270569, 50.4691734, 1916.59485, -0.999831021, 0.0133234374, 0.0126674427, 0.0138728078, 0.998921156, 0.0443183221, -0.012063304, 0.0444865637, -0.99893713)
+block.Anchored = true
+block.Parent = workspace
+
+-- เปลี่ยนตำแหน่งของผู้เล่น
+local player = game.Players.LocalPlayer
+player.Character.HumanoidRootPart.CFrame = CFrame.new(-296.374451, 53.9430771, 1917.17932, -0.993490279, 1.00313997e-08, 0.113917105, 4.9573381e-09, 1, -4.48249864e-08, -0.113917105, -4.39684591e-08, -0.993490279)
+
+-- ฟังก์ชันตรวจสอบว่าผู้เล่นอยู่บน Part หรือไม่โดยใช้ขนาดการตรวจสอบใหม่
+local function checkPlayersInPart()
+    local playersInPart = false
+    local blockSizeX, blockSizeY, blockSizeZ = 15, 10, 15 -- ปรับขนาดเป็น x10 y2 z10
+    
+    for _, p in pairs(game.Players:GetPlayers()) do
+        if p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+            local humanoidRootPart = p.Character.HumanoidRootPart
+            local relativePos = humanoidRootPart.Position - block.Position
+            
+            -- ตรวจสอบว่าผู้เล่นอยู่ในระยะ x10 y2 z10 หรือไม่
+            if math.abs(relativePos.X) <= blockSizeX / 2 and
+               math.abs(relativePos.Y) <= blockSizeY / 2 and
+               math.abs(relativePos.Z) <= blockSizeZ / 2 then
+                playersInPart = true
+                break
+            end
+        end
+    end
+    return playersInPart
+end
+
+-- ลูปตรวจสอบอย่างต่อเนื่อง
+while true do
+    wait(1) -- หน่วงเวลา 1 วินาทีก่อนตรวจสอบอีกครั้ง
+    
+    -- ตรวจสอบว่ามีผู้เล่นอยู่บน Part หรือไม่
+    if not checkPlayersInPart() then
+        block:Destroy() -- ลบ Part ถ้าไม่มีผู้เล่นอยู่บน Part
+        break -- หยุดลูปเมื่อ Part ถูกลบแล้ว
+    end
+end
+        end  
+	})
+
+fackTab:AddButton({
 	Name = "Drawer1",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-346.119629, 9.1031723, 1850.72424, 0.00736123975, -1.08965679e-07, 0.999972939, 3.10921138e-08, 1, 1.08739748e-07, -0.999972939, 3.02908099e-08, 0.00736123975)
@@ -958,9 +1014,121 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-346.505
         end  
 	})
 
+fackTab:AddButton({
+	Name = "tp to save zone",
+	Callback = function()
+-- ตรวจสอบและลบ Part ที่มีชื่อ "fack hub" ถ้ามีอยู่
+local existingBlock = workspace:FindFirstChild("fack hub")
+if existingBlock then
+    existingBlock:Destroy()
+end
+
+-- สร้างบล็อกใหม่
+local block = Instance.new("Part")
+block.Name = "fack hub"
+block.Size = Vector3.new(10, 1, 10) -- ขนาด 10x1x10
+block.CFrame = CFrame.new(-296.270569, 50.4691734, 1916.59485, -0.999831021, 0.0133234374, 0.0126674427, 0.0138728078, 0.998921156, 0.0443183221, -0.012063304, 0.0444865637, -0.99893713)
+block.Anchored = true
+block.Parent = workspace
+
+-- เปลี่ยนตำแหน่งของผู้เล่น
+local player = game.Players.LocalPlayer
+player.Character.HumanoidRootPart.CFrame = CFrame.new(-296.374451, 53.9430771, 1917.17932, -0.993490279, 1.00313997e-08, 0.113917105, 4.9573381e-09, 1, -4.48249864e-08, -0.113917105, -4.39684591e-08, -0.993490279)
+
+-- ฟังก์ชันตรวจสอบว่าผู้เล่นอยู่บน Part หรือไม่โดยใช้ขนาดการตรวจสอบใหม่
+local function checkPlayersInPart()
+    local playersInPart = false
+    local blockSizeX, blockSizeY, blockSizeZ = 15, 10, 15 -- ปรับขนาดเป็น x10 y2 z10
+    
+    for _, p in pairs(game.Players:GetPlayers()) do
+        if p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+            local humanoidRootPart = p.Character.HumanoidRootPart
+            local relativePos = humanoidRootPart.Position - block.Position
+            
+            -- ตรวจสอบว่าผู้เล่นอยู่ในระยะ x10 y2 z10 หรือไม่
+            if math.abs(relativePos.X) <= blockSizeX / 2 and
+               math.abs(relativePos.Y) <= blockSizeY / 2 and
+               math.abs(relativePos.Z) <= blockSizeZ / 2 then
+                playersInPart = true
+                break
+            end
+        end
+    end
+    return playersInPart
+end
+
+-- ลูปตรวจสอบอย่างต่อเนื่อง
+while true do
+    wait(1) -- หน่วงเวลา 1 วินาทีก่อนตรวจสอบอีกครั้ง
+    
+    -- ตรวจสอบว่ามีผู้เล่นอยู่บน Part หรือไม่
+    if not checkPlayersInPart() then
+        block:Destroy() -- ลบ Part ถ้าไม่มีผู้เล่นอยู่บน Part
+        break -- หยุดลูปเมื่อ Part ถูกลบแล้ว
+    end
+end
+        end  
+	})
+
 local Section = fackTab:AddSection({
 	Name = "Paint in Mansion"
 })
+
+fackTab:AddButton({
+	Name = "tp to save zone",
+	Callback = function()
+-- ตรวจสอบและลบ Part ที่มีชื่อ "fack hub" ถ้ามีอยู่
+local existingBlock = workspace:FindFirstChild("fack hub")
+if existingBlock then
+    existingBlock:Destroy()
+end
+
+-- สร้างบล็อกใหม่
+local block = Instance.new("Part")
+block.Name = "fack hub"
+block.Size = Vector3.new(10, 1, 10) -- ขนาด 10x1x10
+block.CFrame = CFrame.new(-296.270569, 50.4691734, 1916.59485, -0.999831021, 0.0133234374, 0.0126674427, 0.0138728078, 0.998921156, 0.0443183221, -0.012063304, 0.0444865637, -0.99893713)
+block.Anchored = true
+block.Parent = workspace
+
+-- เปลี่ยนตำแหน่งของผู้เล่น
+local player = game.Players.LocalPlayer
+player.Character.HumanoidRootPart.CFrame = CFrame.new(-296.374451, 53.9430771, 1917.17932, -0.993490279, 1.00313997e-08, 0.113917105, 4.9573381e-09, 1, -4.48249864e-08, -0.113917105, -4.39684591e-08, -0.993490279)
+
+-- ฟังก์ชันตรวจสอบว่าผู้เล่นอยู่บน Part หรือไม่โดยใช้ขนาดการตรวจสอบใหม่
+local function checkPlayersInPart()
+    local playersInPart = false
+    local blockSizeX, blockSizeY, blockSizeZ = 15, 10, 15 -- ปรับขนาดเป็น x10 y2 z10
+    
+    for _, p in pairs(game.Players:GetPlayers()) do
+        if p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+            local humanoidRootPart = p.Character.HumanoidRootPart
+            local relativePos = humanoidRootPart.Position - block.Position
+            
+            -- ตรวจสอบว่าผู้เล่นอยู่ในระยะ x10 y2 z10 หรือไม่
+            if math.abs(relativePos.X) <= blockSizeX / 2 and
+               math.abs(relativePos.Y) <= blockSizeY / 2 and
+               math.abs(relativePos.Z) <= blockSizeZ / 2 then
+                playersInPart = true
+                break
+            end
+        end
+    end
+    return playersInPart
+end
+
+-- ลูปตรวจสอบอย่างต่อเนื่อง
+while true do
+    wait(1) -- หน่วงเวลา 1 วินาทีก่อนตรวจสอบอีกครั้ง
+    
+    -- ตรวจสอบว่ามีผู้เล่นอยู่บน Part หรือไม่
+    if not checkPlayersInPart() then
+        block:Destroy() -- ลบ Part ถ้าไม่มีผู้เล่นอยู่บน Part
+        break -- หยุดลูปเมื่อ Part ถูกลบแล้ว
+    end
+end
+        end  
+	})
 
 fackTab:AddButton({
 	Name = "Paint1",
@@ -1025,6 +1193,62 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-310.528
         end  
 	})
 
+fackTab:AddButton({
+	Name = "tp to save zone",
+	Callback = function()
+-- ตรวจสอบและลบ Part ที่มีชื่อ "fack hub" ถ้ามีอยู่
+local existingBlock = workspace:FindFirstChild("fack hub")
+if existingBlock then
+    existingBlock:Destroy()
+end
+
+-- สร้างบล็อกใหม่
+local block = Instance.new("Part")
+block.Name = "fack hub"
+block.Size = Vector3.new(10, 1, 10) -- ขนาด 10x1x10
+block.CFrame = CFrame.new(-296.270569, 50.4691734, 1916.59485, -0.999831021, 0.0133234374, 0.0126674427, 0.0138728078, 0.998921156, 0.0443183221, -0.012063304, 0.0444865637, -0.99893713)
+block.Anchored = true
+block.Parent = workspace
+
+-- เปลี่ยนตำแหน่งของผู้เล่น
+local player = game.Players.LocalPlayer
+player.Character.HumanoidRootPart.CFrame = CFrame.new(-296.374451, 53.9430771, 1917.17932, -0.993490279, 1.00313997e-08, 0.113917105, 4.9573381e-09, 1, -4.48249864e-08, -0.113917105, -4.39684591e-08, -0.993490279)
+
+-- ฟังก์ชันตรวจสอบว่าผู้เล่นอยู่บน Part หรือไม่โดยใช้ขนาดการตรวจสอบใหม่
+local function checkPlayersInPart()
+    local playersInPart = false
+    local blockSizeX, blockSizeY, blockSizeZ = 15, 10, 15 -- ปรับขนาดเป็น x10 y2 z10
+    
+    for _, p in pairs(game.Players:GetPlayers()) do
+        if p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+            local humanoidRootPart = p.Character.HumanoidRootPart
+            local relativePos = humanoidRootPart.Position - block.Position
+            
+            -- ตรวจสอบว่าผู้เล่นอยู่ในระยะ x10 y2 z10 หรือไม่
+            if math.abs(relativePos.X) <= blockSizeX / 2 and
+               math.abs(relativePos.Y) <= blockSizeY / 2 and
+               math.abs(relativePos.Z) <= blockSizeZ / 2 then
+                playersInPart = true
+                break
+            end
+        end
+    end
+    return playersInPart
+end
+
+-- ลูปตรวจสอบอย่างต่อเนื่อง
+while true do
+    wait(1) -- หน่วงเวลา 1 วินาทีก่อนตรวจสอบอีกครั้ง
+    
+    -- ตรวจสอบว่ามีผู้เล่นอยู่บน Part หรือไม่
+    if not checkPlayersInPart() then
+        block:Destroy() -- ลบ Part ถ้าไม่มีผู้เล่นอยู่บน Part
+        break -- หยุดลูปเมื่อ Part ถูกลบแล้ว
+    end
+end
+        end  
+	})
+
 local Section = fackTab:AddSection({
 	Name = "Mansion"
 })
@@ -1040,6 +1264,62 @@ fackTab:AddButton({
 	Name = "tp to Exit(ระวัง Monster)",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-295.140381, 11.0755844, 2033.98779, -0.999180973, 9.11948472e-09, -0.0404646099, 8.73500472e-09, 1, 9.67843317e-09, 0.0404646099, 9.31704847e-09, -0.999180973)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to save zone",
+	Callback = function()
+-- ตรวจสอบและลบ Part ที่มีชื่อ "fack hub" ถ้ามีอยู่
+local existingBlock = workspace:FindFirstChild("fack hub")
+if existingBlock then
+    existingBlock:Destroy()
+end
+
+-- สร้างบล็อกใหม่
+local block = Instance.new("Part")
+block.Name = "fack hub"
+block.Size = Vector3.new(10, 1, 10) -- ขนาด 10x1x10
+block.CFrame = CFrame.new(-296.270569, 50.4691734, 1916.59485, -0.999831021, 0.0133234374, 0.0126674427, 0.0138728078, 0.998921156, 0.0443183221, -0.012063304, 0.0444865637, -0.99893713)
+block.Anchored = true
+block.Parent = workspace
+
+-- เปลี่ยนตำแหน่งของผู้เล่น
+local player = game.Players.LocalPlayer
+player.Character.HumanoidRootPart.CFrame = CFrame.new(-296.374451, 53.9430771, 1917.17932, -0.993490279, 1.00313997e-08, 0.113917105, 4.9573381e-09, 1, -4.48249864e-08, -0.113917105, -4.39684591e-08, -0.993490279)
+
+-- ฟังก์ชันตรวจสอบว่าผู้เล่นอยู่บน Part หรือไม่โดยใช้ขนาดการตรวจสอบใหม่
+local function checkPlayersInPart()
+    local playersInPart = false
+    local blockSizeX, blockSizeY, blockSizeZ = 15, 10, 15 -- ปรับขนาดเป็น x10 y2 z10
+    
+    for _, p in pairs(game.Players:GetPlayers()) do
+        if p.Character and p.Character:FindFirstChild("HumanoidRootPart") then
+            local humanoidRootPart = p.Character.HumanoidRootPart
+            local relativePos = humanoidRootPart.Position - block.Position
+            
+            -- ตรวจสอบว่าผู้เล่นอยู่ในระยะ x10 y2 z10 หรือไม่
+            if math.abs(relativePos.X) <= blockSizeX / 2 and
+               math.abs(relativePos.Y) <= blockSizeY / 2 and
+               math.abs(relativePos.Z) <= blockSizeZ / 2 then
+                playersInPart = true
+                break
+            end
+        end
+    end
+    return playersInPart
+end
+
+-- ลูปตรวจสอบอย่างต่อเนื่อง
+while true do
+    wait(1) -- หน่วงเวลา 1 วินาทีก่อนตรวจสอบอีกครั้ง
+    
+    -- ตรวจสอบว่ามีผู้เล่นอยู่บน Part หรือไม่
+    if not checkPlayersInPart() then
+        block:Destroy() -- ลบ Part ถ้าไม่มีผู้เล่นอยู่บน Part
+        break -- หยุดลูปเมื่อ Part ถูกลบแล้ว
+    end
+end
         end  
 	})
 
