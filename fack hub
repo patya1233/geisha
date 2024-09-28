@@ -1760,6 +1760,7 @@ while true do
             -- ถ้ามี ProximityPrompt ให้เรียกฟังก์ชันจำลองการกด
             if proximityPrompt then
                 simulateProximityPrompt(proximityPrompt)
+                simulateProximityPrompt(prompt)
             else
                 print("No ProximityPrompt found in:", sickleName)
             end
