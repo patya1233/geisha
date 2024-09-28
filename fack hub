@@ -1,6 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = fack hub:MakeWindow({Name = "Fack HUB", HidePremium = false,  Introtext = "Fack HUB", SaveConfig = true, ConfigFolder = "Fack HUB"})
+local Window = OrionLib:MakeWindow({Name = "Fack HUB", HidePremium = false,  Introtext = "Fack HUB", SaveConfig = true, ConfigFolder = "Fack HUB"})
 
 OrionLib:MakeNotification({
 	Name = "hey",
