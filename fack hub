@@ -1259,6 +1259,53 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "Key Collection(ระวัง Monster)",
 	Callback = function()
+-- สคริปต์ปรับ ProximityPrompt ใน Workspace
+
+local workspace = game:GetService("Workspace")
+
+-- ตรวจสอบโฟลเดอร์ Mansion
+local mansionFolder = workspace:FindFirstChild("Mansion")
+if mansionFolder then
+    -- ตรวจสอบโมเดล Altar
+    local altarModel = mansionFolder:FindFirstChild("Altar")
+    if altarModel then
+        -- ตรวจสอบ MeshPart Main
+        local mainMeshPart = altarModel:FindFirstChild("Main")
+        if mainMeshPart and mainMeshPart:IsA("MeshPart") then
+            -- ตรวจสอบ Attachment ใน MeshPart
+            local attachments = mainMeshPart:GetChildren()
+            local hasProximityPrompt = false
+
+            for _, attachment in ipairs(attachments) do
+                if attachment:IsA("Attachment") then
+                    -- ตรวจสอบว่า Attachment นี้มี ProximityPrompt หรือไม่
+                    local proximityPrompt = attachment:FindFirstChild("ProximityPrompt")
+                    if proximityPrompt then
+                        hasProximityPrompt = true
+                        -- ปรับเวลาการกดค้างเป็น 0 วินาที
+                        proximityPrompt.ActionText = "Press"
+                        proximityPrompt.RequiresLineOfSight = false
+                        proximityPrompt.MaxActivationDistance = 5
+                        proximityPrompt.HoldDuration = 0
+                        print("ปรับ HoldDuration ของ ProximityPrompt เป็น 0 วินาที!")
+                        break
+                    end
+                end
+            end
+
+            if not hasProximityPrompt then
+                print("ไม่พบ ProximityPrompt ใน Attachment ของ Main.")
+            end
+        else
+            print("ไม่พบ MeshPart ชื่อ Main ใน Altar.")
+        end
+    else
+        print("ไม่พบโมเดล Altar ใน Mansion.")
+    end
+else
+    print("ไม่พบโฟลเดอร์ Mansion ใน Workspace.")
+end
+
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-295.607086, 14.5304127, 1916.86096, -0.0463148206, -1.04411882e-07, -0.998926878, 4.76350559e-09, 1, -1.04744906e-07, 0.998926878, -9.60963575e-09, -0.0463148206)
         end  
 	})
@@ -1266,6 +1313,45 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-295.607
 fackTab:AddButton({
 	Name = "tp to Exit(ระวัง Monster)",
 	Callback = function()
+-- กำหนด Workspace และ Folder ที่ต้องการตรวจสอบ
+local workspace = game:GetService("Workspace")
+local mansionFolder = workspace:FindFirstChild("Mansion")
+
+-- ตรวจสอบว่า Folder มีอยู่ใน Workspace
+if mansionFolder then
+    -- ตรวจสอบว่า Model ชื่อ ExitGate มีอยู่ใน Folder
+    local exitGateModel = mansionFolder:FindFirstChild("ExitGate")
+    if exitGateModel then
+        -- ตรวจสอบว่า MeshPart ชื่อ Lock มีอยู่ใน Model
+        local lockPart = exitGateModel:FindFirstChild("Lock")
+        if lockPart and lockPart:IsA("MeshPart") then
+            -- ตรวจสอบว่า Attachment ชื่อ PromptAttach มีอยู่ใน MeshPart
+            local promptAttach = lockPart:FindFirstChild("PromptAttach")
+            if promptAttach and promptAttach:IsA("Attachment") then
+                -- ตรวจสอบว่า ProximityPrompt ชื่อ UnlockPrompt มีอยู่ใน Attachment
+                local unlockPrompt = promptAttach:FindFirstChild("UnlockPrompt")
+                if unlockPrompt then
+                    print("ProximityPrompt ชื่อ UnlockPrompt พบใน Attachment ชื่อ PromptAttach")
+                    -- เปลี่ยนระยะเวลาการกดค้างจาก 6 เป็น 0
+                    unlockPrompt.ActionText = "Unlock"
+                    unlockPrompt.HoldDuration = 0
+                    print("เปลี่ยนระยะเวลาการกดค้างจาก 6 เป็น 0")
+                else
+                    print("ไม่พบ ProximityPrompt ชื่อ UnlockPrompt ใน Attachment ชื่อ PromptAttach")
+                end
+            else
+                print("ไม่พบ Attachment ชื่อ PromptAttach ใน MeshPart ชื่อ Lock")
+            end
+        else
+            print("ไม่พบ MeshPart ชื่อ Lock ใน Model ชื่อ ExitGate")
+        end
+    else
+        print("ไม่พบ Model ชื่อ ExitGate ใน Folder ชื่อ Mansion")
+    end
+else
+    print("ไม่พบ Folder ชื่อ Mansion ใน Workspace")
+end
+
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-295.140381, 11.0755844, 2033.98779, -0.999180973, 9.11948472e-09, -0.0404646099, 8.73500472e-09, 1, 9.67843317e-09, 0.0404646099, 9.31704847e-09, -0.999180973)
         end  
 	})
@@ -1601,6 +1687,23 @@ if mansion then
 else
     print("ไม่พบ Mansion ใน Workspace")
 end
+        end  
+	})
+
+local fackTab = Window:MakeTab({
+	Name = "chapter2 part2",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+	})
+
+local Section = fackTab:AddSection({
+	Name = "village"
+})
+
+fackTab:AddButton({
+	Name = "tp to village",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(370.257568, 12.1226311, 493.857544, 1, 0, 0, 0, 1, 0, 0, 0, 1)
         end  
 	})
 
