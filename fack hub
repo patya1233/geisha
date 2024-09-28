@@ -1908,7 +1908,7 @@ local Section = fackTab:AddSection({
 })
 
 fackTab:AddButton({
-	Name = "tp to village",
+	Name = "esp sickle",
 	Callback = function()
 -- ฟังก์ชันตรวจสอบไฟล์ใน Workspace และจัดการ Highlights และ ESP Text
 local function checkForSickles()
