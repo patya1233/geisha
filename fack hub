@@ -906,6 +906,144 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-331.572
 	})
 
 local Section = fackTab:AddSection({
+	Name = "Drawer in Mansion"
+})
+
+fackTab:AddButton({
+	Name = "Drawer1",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-346.119629, 9.1031723, 1850.72424, 0.00736123975, -1.08965679e-07, 0.999972939, 3.10921138e-08, 1, 1.08739748e-07, -0.999972939, 3.02908099e-08, 0.00736123975)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Drawer2",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-247.769257, 11.3599663, 1830.10718, -0.653299451, -6.26985184e-08, -0.757099628, -9.97300353e-10, 1, -8.19535231e-08, 0.757099628, -5.27851363e-08, -0.653299451)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Drawer3",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-245.719971, 9.10315132, 1841.6355, 0.0230289847, 9.9820447e-08, -0.999734819, -7.03713923e-08, 1, 9.8225911e-08, 0.999734819, 6.80906922e-08, 0.0230289847)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Drawer4",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-243.72319, 11.075573, 1894.61804, -0.0219076425, 6.31053183e-08, -0.999759972, -6.95191602e-08, 1, 6.46438352e-08, 0.999759972, 7.09186736e-08, -0.0219076425)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Drawer5",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-343.700958, 11.0755959, 1901.0166, 0.0252975654, -6.66687043e-08, -0.999679983, 1.95267336e-09, 1, -6.66406308e-08, 0.999679983, -2.66202727e-10, 0.0252975654)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Drawer6",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-244.850769, 9.10314751, 2005.15222, 0.00497667305, -6.8261933e-08, -0.999987602, 2.31268817e-08, 1, -6.81476848e-08, 0.999987602, -2.27874466e-08, 0.00497667305)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Drawer7",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-346.505402, 11.0755959, 2035.69543, -0.0342418849, 1.00687039e-07, 0.99941355, 3.59428505e-08, 1, -9.95146436e-08, -0.99941355, 3.25142047e-08, -0.0342418849)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "Paint in Mansion"
+})
+
+fackTab:AddButton({
+	Name = "Paint1",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-259.058624, 11.3599663, 1834.75586, -0.999813378, 1.40849936e-08, 0.0193214454, 1.3088937e-08, 1, -5.16783665e-08, -0.0193214454, -5.14158209e-08, -0.999813378)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Paint2",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-348.826965, 11.1231651, 1832.11011, -0.0416619591, 2.72506497e-08, 0.999131739, 2.32039383e-08, 1, -2.63067701e-08, -0.999131739, 2.20878e-08, -0.0416619629)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Paint3",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-340.378448, 11.0755959, 1928.82507, 0.0140016023, -4.95118879e-09, -0.99990195, -1.38024692e-09, 1, -4.97100183e-09, 0.99990195, 1.44971368e-09, 0.0140016023)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Paint4 (ระวัง Monster)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-246.637375, 11.075573, 1939.37024, 0.99477309, -3.91858208e-08, 0.102110304, 4.63932786e-08, 1, -6.82102055e-08, -0.102110304, 7.25909075e-08, 0.99477309)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Paint5 (ระวัง Monster)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-344.270935, 11.0755959, 1939.79626, 0.998900831, 6.72487788e-10, 0.0468731299, 1.93125557e-10, 1, -1.84626252e-08, -0.0468731299, 1.84513844e-08, 0.998900831)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Paint6",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-249.172058, 11.075573, 1984.22339, -0.996270955, -1.23546409e-08, -0.086279802, -3.08701975e-09, 1, -1.07546988e-07, 0.086279802, -1.0687959e-07, -0.996270955)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Paint7",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-339.162292, 11.0755959, 1983.98438, -0.999993861, 1.34526319e-08, 0.00349365594, 1.37795046e-08, 1, 9.35375724e-08, -0.00349365594, 9.35851432e-08, -0.999993861)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Paint8",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-241.202576, 11.0755711, 2036.01306, 0.086889565, 4.82434714e-09, -0.996217966, -3.8297765e-09, 1, 4.50863125e-09, 0.996217966, 3.42353901e-09, 0.086889565)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "Paint9 (ระวัง Monster)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-310.528442, 11.3568974, 1968.02612, 0.997930348, -1.19547821e-08, 0.0643037185, 1.27076927e-08, 1, -1.12996608e-08, -0.0643037185, 1.20934267e-08, 0.997930348)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "Mansion"
+})
+
+fackTab:AddButton({
+	Name = "Key Collection(ระวัง Monster)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-295.607086, 14.5304127, 1916.86096, -0.0463148206, -1.04411882e-07, -0.998926878, 4.76350559e-09, 1, -1.04744906e-07, 0.998926878, -9.60963575e-09, -0.0463148206)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to Exit(ระวัง Monster)",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-295.140381, 11.0755844, 2033.98779, -0.999180973, 9.11948472e-09, -0.0404646099, 8.73500472e-09, 1, 9.67843317e-09, 0.0404646099, 9.31704847e-09, -0.999180973)
+        end  
+	})
+
+local Section = fackTab:AddSection({
 	Name = "esp Wooden bridge"
 })
 
@@ -1023,9 +1161,9 @@ local function addHighlightToHumanoid()
                 local highlight = Instance.new("Highlight")
                 highlight.Name = "Highlight"
                 highlight.Parent = geishaModel -- เพิ่ม Highlight ลงในโมเดล Geisha
-                highlight.FillColor = Color3.fromRGB(255, 200, 200) -- สีแดงอ่อน
+                highlight.FillColor = Color3.fromRGB(255, 0, 0) -- สีแดงอ่อน
                 highlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- สีแดง
-                highlight.OutlineTransparency = 0 -- ไม่โปร่งใส
+                highlight.OutlineTransparency = 0.5 -- ไม่โปร่งใส
 
                 print("เพิ่ม Highlight ให้กับ Humanoid ในโมเดล Geisha")
             else
@@ -1041,6 +1179,145 @@ end
 
 -- เรียกใช้ฟังก์ชัน
 addHighlightToHumanoid()
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "esp Paint and Drawer",
+	Callback = function()
+-- ตรวจสอบว่าโฟลเดอร์ Mansion และ Drawers มีอยู่หรือไม่
+local mansionFolder = game.Workspace:FindFirstChild("Mansion")
+if mansionFolder then
+    local drawersFolder = mansionFolder:FindFirstChild("Drawers")
+    
+    if drawersFolder then
+        print("สิ่งที่อยู่ในโฟลเดอร์ Drawers:")
+        
+        -- วนลูปเพื่อตรวจสอบว่าในโฟลเดอร์ Drawers มีอะไรบ้าง
+        local drawerNumber = 1
+        
+        for _, drawer in pairs(drawersFolder:GetChildren()) do
+            if drawerNumber <= 7 then
+                print(drawer.Name)
+                
+                -- ถ้ามี Highlight อยู่แล้ว ให้ลบทิ้งก่อน
+                local existingHighlight = drawer:FindFirstChildOfClass("Highlight")
+                if existingHighlight then
+                    existingHighlight:Destroy()
+                end
+                
+                -- เพิ่ม Highlight ใหม่
+                local highlight = Instance.new("Highlight")
+                highlight.Parent = drawer
+                highlight.FillColor = Color3.fromRGB(0, 255, 0)  -- สีเขียวสำหรับด้านใน
+                highlight.OutlineColor = Color3.fromRGB(0, 255, 0) -- สีเขียวสำหรับเส้นรอบ
+
+                -- ถ้ามี BillboardGui (ESP Text) อยู่แล้ว ให้ลบทิ้งก่อน
+                local existingBillboardGui = drawer:FindFirstChildOfClass("BillboardGui")
+                if existingBillboardGui then
+                    existingBillboardGui:Destroy()
+                end
+
+                -- สร้าง BillboardGui สำหรับ ESP Text
+                local billboardGui = Instance.new("BillboardGui")
+                billboardGui.Parent = drawer
+                billboardGui.AlwaysOnTop = true
+                billboardGui.Size = UDim2.new(0, 17, 0, 17) -- ขนาดของกล่องข้อความ
+                billboardGui.StudsOffset = Vector3.new(0, 0, 0) -- ระยะห่างจากวัตถุ
+
+                -- สร้าง TextLabel สำหรับตัวเลข ESP
+                local textLabel = Instance.new("TextLabel")
+                textLabel.Parent = billboardGui
+                textLabel.Size = UDim2.new(1, 0, 1, 0) -- ขนาดข้อความเต็มกล่อง
+                textLabel.BackgroundTransparency = 1 -- พื้นหลังโปร่งใส
+                textLabel.Text = tostring(drawerNumber) -- แสดงตัวเลขเรียงจาก 1 ถึง 7
+                textLabel.TextColor3 = Color3.fromRGB(255, 255, 255) -- สีฟ้าของตัวอักษร
+                textLabel.TextScaled = true -- ขนาดข้อความปรับตามขนาดกล่อง
+
+                drawerNumber = drawerNumber + 1
+            end
+        end
+    else
+        print("ไม่พบโฟลเดอร์ Drawers ใน Mansion")
+    end
+else
+    print("ไม่พบโฟลเดอร์ Mansion ใน Workspace")
+end
+
+-- สคริปต์นี้จะตรวจสอบและเพิ่ม Highlights และ ESP Text ให้กับ Paint1 ถึง Paint9 ใน MoveablePaintings
+-- หากมี Highlight และ ESP Text อันเดิมอยู่แล้ว จะลบทิ้งก่อน
+
+-- เข้าถึง Workspace
+local workspace = game:GetService("Workspace")
+
+-- เข้าถึง Mansion
+local mansion = workspace:FindFirstChild("Mansion")
+
+-- ตรวจสอบว่า Mansion มีอยู่ใน Workspace หรือไม่
+if mansion then
+    -- เข้าถึง MoveablePaintings
+    local moveablePaintings = mansion:FindFirstChild("MoveablePaintings")
+
+    -- ตรวจสอบว่า MoveablePaintings มีอยู่ใน Mansion หรือไม่
+    if moveablePaintings then
+        print("กำลังลบ Highlight และ ESP Text อันเดิม (ถ้ามี) และเพิ่มอันใหม่ให้กับ Paint1 ถึง Paint9:")
+
+        -- วน loop ผ่าน Paint1 ถึง Paint9
+        for i = 1, 9 do
+            local paintingName = "Paint" .. i
+            local painting = moveablePaintings:FindFirstChild(paintingName)
+
+            -- ตรวจสอบว่าพบ Paint1 ถึง Paint9 หรือไม่
+            if painting then
+                -- ตรวจสอบและลบ Highlight เดิมถ้ามี
+                local existingHighlight = painting:FindFirstChildOfClass("Highlight")
+                if existingHighlight then
+                    existingHighlight:Destroy()
+                    print("ลบ Highlight เดิมจาก " .. paintingName)
+                end
+
+                -- ตรวจสอบและลบ BillboardGui (ESP Text) เดิมถ้ามี
+                local existingBillboardGui = painting:FindFirstChildOfClass("BillboardGui")
+                if existingBillboardGui then
+                    existingBillboardGui:Destroy()
+                    print("ลบ ESP Text เดิมจาก " .. paintingName)
+                end
+
+                -- สร้าง Highlight ใหม่
+                local highlight = Instance.new("Highlight")
+                highlight.Parent = painting
+                highlight.FillColor = Color3.new(0.5, 0, 0.5) -- สีม่วง
+                highlight.FillTransparency = 0.5 -- โปร่งใส
+                highlight.OutlineColor = Color3.new(0.5, 0, 0.5) -- สีม่วงสำหรับเส้นขอบ
+                highlight.OutlineTransparency = 0 -- เส้นขอบไม่โปร่งใส
+
+                -- สร้าง BillboardGui สำหรับ ESP Text ใหม่
+                local billboardGui = Instance.new("BillboardGui")
+                billboardGui.Parent = painting
+                billboardGui.Size = UDim2.new(0, 17, 0, 17) -- ขนาดของกล่องข้อความ
+                billboardGui.StudsOffset = Vector3.new(-1.3, 0, 0) -- ตำแหน่งเลื่อนขึ้นจากวัตถุ
+                billboardGui.AlwaysOnTop = true -- ให้ข้อความแสดงอยู่เสมอ
+
+                -- สร้าง TextLabel สำหรับแสดงหมายเลขใหม่
+                local textLabel = Instance.new("TextLabel")
+                textLabel.Parent = billboardGui
+                textLabel.Size = UDim2.new(1, 0, 1, 0) -- ขนาดของข้อความใน BillboardGui
+                textLabel.BackgroundTransparency = 1 -- ทำให้พื้นหลังโปร่งใส
+                textLabel.Text = tostring(i) -- แสดงตัวเลข 1 ถึง 9
+                textLabel.TextColor3 = Color3.new(1, 1, 0) -- สีเหลือง
+                textLabel.TextScaled = true -- ปรับขนาดข้อความตามกล่อง
+
+                print("เพิ่ม Highlight และ ESP Text ให้กับ " .. paintingName)
+            else
+                print(paintingName .. " ไม่พบใน MoveablePaintings")
+            end
+        end
+    else
+        print("ไม่พบ MoveablePaintings ใน Mansion")
+    end
+else
+    print("ไม่พบ Mansion ใน Workspace")
+end
         end  
 	})
 
