@@ -1306,7 +1306,7 @@ else
     print("ไม่พบโฟลเดอร์ Mansion ใน Workspace.")
 end
 
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-295.607086, 14.5304127, 1916.86096, -0.0463148206, -1.04411882e-07, -0.998926878, 4.76350559e-09, 1, -1.04744906e-07, 0.998926878, -9.60963575e-09, -0.0463148206)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-295.625854, 9.73603058, 1913.34167, -0.999999106, 9.95428362e-09, -0.00133929215, 1.00368975e-08, 1, -6.1677909e-08, 0.00133929215, -6.16912956e-08, -0.999999106)
         end  
 	})
 
@@ -1848,6 +1848,13 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-699.113
 	})
 
 fackTab:AddButton({
+	Name = "tp to save zone",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-654.174683, 44.7868347, 525.828552, -0.0393672846, -6.42814655e-08, 0.999224782, 2.33036559e-08, 1, 6.52494521e-08, -0.999224782, 2.5854284e-08, -0.0393672846)
+        end  
+	})
+
+fackTab:AddButton({
 	Name = "tp to exit",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-899.630066, 13.9980259, 554.282288, -0.0680072829, -9.68848042e-08, 0.997684836, 2.13657514e-09, 1, 9.7255267e-08, -0.997684836, 8.74569483e-09, -0.0680072829)
@@ -1891,9 +1898,96 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-852.061
 	})
 
 fackTab:AddButton({
-	Name = "auto get Key parts (ใช้งานไม่ได้)",
+	Name = "auto get Key parts",
 	Callback = function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new()
+local RunService = game:GetService("RunService")
+local keySpawnFolder = game.Workspace:FindFirstChild("KeySpawn")
+
+if keySpawnFolder then
+    -- สร้างรายการชื่อของ Part ที่ต้องการตรวจสอบ
+    local partNames = {"Part"}
+    for i = 1, 9 do
+        table.insert(partNames, "Part" .. i)
+    end
+
+    -- ฟังก์ชันวาร์ปไปยังตำแหน่งที่ต้องการ
+    local function teleportToPosition(position)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local camera = workspace.CurrentCamera
+        
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            humanoidRootPart.CFrame = CFrame.new(position + Vector3.new(0, 5, 0))
+            camera.CFrame = CFrame.new(camera.CFrame.Position, camera.CFrame.Position + Vector3.new(0, -1, 0))
+        end
+    end
+
+    -- ฟังก์ชันหลักในการตรวจสอบและวาร์ป
+    local function checkPartsAndTeleport()
+        for _, partName in pairs(partNames) do
+            local part = keySpawnFolder:FindFirstChild(partName)
+            if part then
+                for i = 1, 6 do
+                    local keyPart = part:FindFirstChild("KeyPart" .. i)
+                    if keyPart then
+                        teleportToPosition(keyPart.Position)
+                        wait(0.5) -- ปรับเวลาตามต้องการ
+                    end
+                end
+            end
+        end
+    end
+
+    -- ฟังก์ชันสำหรับจำลองการกด ProximityPrompt
+    local function simulateProximityPrompt(proximityPrompt)
+        proximityPrompt:InputHoldBegin()
+        proximityPrompt:InputHoldEnd()
+    end
+
+    -- ฟังก์ชันสำหรับตรวจสอบ ProximityPrompt ใน KeyPart แต่ละชิ้น
+    local function checkProximityPrompt(keyPart)
+        local proximityPrompt = keyPart:FindFirstChildOfClass("ProximityPrompt")
+        if proximityPrompt then
+            simulateProximityPrompt(proximityPrompt)
+        end
+    end
+
+    -- ฟังก์ชันสำหรับตรวจสอบภายใน Part แต่ละชิ้น
+    local function checkInsidePart(part)
+        for _, child in pairs(part:GetChildren()) do
+            if string.match(child.Name, "^KeyPart%d$") then
+                checkProximityPrompt(child)
+            end
+        end
+    end
+
+    -- วนลูปตรวจสอบ Part และ Part1 ถึง Part9
+    local function checkPartsForProximityPrompts()
+        for _, item in pairs(keySpawnFolder:GetChildren()) do
+            if item.Name == "Part" or string.match(item.Name, "^Part%d$") then
+                checkInsidePart(item)
+            end
+        end
+    end
+
+    -- การใช้ RenderStepped เพื่อให้ทำงานพร้อมกัน
+    local teleportCoroutine = coroutine.create(checkPartsAndTeleport)
+    local proximityCoroutine = coroutine.create(function()
+        local startTime = tick()
+        while tick() - startTime < 10 do
+            checkPartsForProximityPrompts()
+            RunService.RenderStepped:Wait() -- รอเพื่อให้การทำงานไม่รบกวนกัน
+        end
+    end)
+
+    -- เริ่มการทำงานของทั้งสอง coroutine
+    coroutine.resume(teleportCoroutine)
+    coroutine.resume(proximityCoroutine)
+
+else
+    print("ไม่พบโฟลเดอร์ KeySpawn ใน Workspace")
+end
         end  
 	})
 
@@ -1901,6 +1995,13 @@ fackTab:AddButton({
 	Name = "tp to exit",
 	Callback = function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-246.528229, 12.9980259, -556.101807, -0.0216634255, 1.57485704e-08, -0.999765337, -2.87889232e-08, 1, 1.63760809e-08, 0.999765337, 2.91369293e-08, -0.0216634255)
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "tp to castle",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(601.12262, 35.9240189, -666.023926, 0.290898263, 4.05991756e-08, -0.956753969, -4.87936163e-08, 1, 2.75987304e-08, 0.956753969, 3.86550632e-08, 0.290898263)
         end  
 	})
 
