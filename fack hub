@@ -1776,7 +1776,7 @@ local function warpToSickle(sickle)
     local sickleObject = game.Workspace:FindFirstChild(sickle)
     if sickleObject then
         -- วาร์ปไปที่ตรงกลางของ Sickle โดยเพิ่มแกน Y เล็กน้อย
-        humanoidRootPart.CFrame = sickleObject.CFrame + Vector3.new(0, 5, 0) -- เพิ่มแกน Y ขึ้น 5 หน่วย
+        humanoidRootPart.CFrame = sickleObject.CFrame + Vector3.new(0, 1, 0) -- เพิ่มแกน Y ขึ้น 5 หน่วย
 
         -- ปรับมุมกล้องให้หันลงไปที่พื้น
         camera.CFrame = CFrame.new(humanoidRootPart.Position, humanoidRootPart.Position - Vector3.new(0, 1, 0))
