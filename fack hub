@@ -1728,32 +1728,6 @@ end
 -- เรียกใช้ฟังก์ชัน
 checkProximityPrompt()
 
--- ตรวจสอบว่า Player อยู่ในเกมแล้วหรือยัง
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
-local camera = game.Workspace.CurrentCamera
-
--- ฟังก์ชันเพื่อวาร์ปไปหา Sickle ตามลำดับและปรับมุมกล้อง
-local function warpToSickle(sickle)
-    local sickleObject = game.Workspace:FindFirstChild(sickle)
-    if sickleObject then
-        -- วาร์ปไปที่ตรงกลางของ Sickle โดยไม่เพิ่มแกน Y
-        humanoidRootPart.CFrame = sickleObject.CFrame
-
-        -- ปรับมุมกล้องให้หันลงไปที่พื้น
-        camera.CFrame = CFrame.new(humanoidRootPart.Position, humanoidRootPart.Position - Vector3.new(0, 1, 0))
-
-        wait(1) -- รอ 1 วินาทีก่อนที่จะตรวจสอบตัวต่อไป
-    end
-end
-
--- ลำดับการตรวจสอบ Sickle1 ถึง Sickle5
-for i = 1, 5 do
-    local sickleName = "Sickle" .. i
-    warpToSickle(sickleName)
-end
-
 -- ฟังก์ชันจำลองการกด ProximityPrompt
 local function simulateProximityPrompt(proximityPrompt)
     if proximityPrompt and proximityPrompt:IsA("ProximityPrompt") then
@@ -1797,6 +1771,31 @@ end
 
 -- เรียกใช้ฟังก์ชันหลัก
 runFor10Seconds()
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local camera = game.Workspace.CurrentCamera
+
+-- ฟังก์ชันเพื่อวาร์ปไปหา Sickle ตามลำดับและปรับมุมกล้อง
+local function warpToSickle(sickle)
+    local sickleObject = game.Workspace:FindFirstChild(sickle)
+    if sickleObject then
+        -- วาร์ปไปที่ตรงกลางของ Sickle โดยเพิ่มแกน Y เล็กน้อย
+        humanoidRootPart.CFrame = sickleObject.CFrame + Vector3.new(0, 5, 0) -- เพิ่มแกน Y ขึ้น 5 หน่วย
+
+        -- ปรับมุมกล้องให้หันลงไปที่พื้น
+        camera.CFrame = CFrame.new(humanoidRootPart.Position, humanoidRootPart.Position - Vector3.new(0, 1, 0))
+
+        wait(1) -- รอ 1 วินาทีก่อนที่จะตรวจสอบตัวต่อไป
+    end
+end
+
+-- ลำดับการตรวจสอบ Sickle1 ถึง Sickle5
+for i = 1, 5 do
+    local sickleName = "Sickle" .. i
+    warpToSickle(sickleName)
+end
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.2287636, 12.9980259, 403.747498, 0.999955833, 1.79942159e-08, -0.00939891022, -1.86687537e-08, 1, -7.16799633e-08, 0.00939891022, 7.18522628e-08, 0.999955833)
         end  
