@@ -1800,8 +1800,7 @@ checkProximityPrompt()
 coroutine.wrap(runFor10Seconds)()
 coroutine.wrap(warpAndCheck)()
 
--- ตัวอย่าง: คุณอาจต้องการให้ฟังก์ชัน checkProximityPrompt ทำงานในช่วงเดียวกัน
-coroutine.wrap(checkProximityPrompt)()
+wait(10)
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.2287636, 12.9980259, 403.747498, 0.999955833, 1.79942159e-08, -0.00939891022, -1.86687537e-08, 1, -7.16799633e-08, 0.00939891022, 7.18522628e-08, 0.999955833)
         end  
