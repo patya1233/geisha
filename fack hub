@@ -2343,4 +2343,112 @@ end
         end  
 	})
 
+local fackTab = Window:MakeTab({
+	Name = "Boss Fight",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+	})
+
+local Section = fackTab:AddSection({
+	Name = "Yuki"
+})
+
+fackTab:AddButton({
+	Name = "auto get Katana parts",
+	Callback = function()
+local positions = {
+    CFrame.new(-466.46698, 6.82509565, -262.709137, 0.577508569, 5.38456106e-08, 0.816384614, -5.61106539e-08, 1, -2.62636313e-08, -0.816384614, -3.0640404e-08, 0.577508569),
+    CFrame.new(-443.481873, 7.35430384, -308.27655, 0.814294279, 1.37640166e-08, -0.580452263, -2.32624267e-08, 1, -8.92139695e-09, 0.580452263, 2.076737e-08, 0.814294279),
+    CFrame.new(-657.912109, 7.07318687, -309.022125, 0.235294968, -1.12110548e-07, 0.971924007, 6.11672002e-09, 1, 1.13868282e-07, -0.971924007, -2.08476472e-08, 0.235294968)
+}
+
+local teleportDuration = 0.5 -- ระยะเวลาในการวาปไปยังตำแหน่งถัดไป (วินาที)
+local player = game.Players.LocalPlayer
+
+-- ฟังก์ชันสำหรับวาปไปยังตำแหน่งในลิสต์
+local function teleportToPositions()
+    for _, targetCFrame in ipairs(positions) do
+        player.Character.HumanoidRootPart.CFrame = targetCFrame
+        wait(teleportDuration) -- รอระยะเวลาก่อนวาปไปยังตำแหน่งถัดไป
+    end
+end
+
+local Workspace = game:GetService("Workspace")
+
+-- หาฟีเจอร์ "Katana Fragments" ใน Workspace
+local katanaFragmentsFolder = Workspace:FindFirstChild("Katana Fragments")
+
+-- กำหนดชื่อไฟล์ที่ต้องการตรวจสอบ
+local filenamesToCheck = {"Blade.001", "Blade.006", "Cover.001"}
+
+-- ฟังก์ชันเพื่อจำลองการกด ProximityPrompt
+local function simulateProximityPrompt(prompt)
+    local duration = 5 -- ระยะเวลา  วินาที
+    local startTime = tick() -- เวลาที่เริ่ม
+    while tick() - startTime < duration do
+        -- สร้าง InputHoldBegin
+        prompt:InputHoldBegin() 
+        wait(0.1) -- ระยะเวลาในการกด (วินาที)
+        -- สร้าง InputHoldEnd
+        prompt:InputHoldEnd()
+        wait(0) -- รอ  วินาทีก่อนที่จะกดอีกครั้ง
+    end
+end
+
+-- ฟังก์ชันสำหรับเช็คโฟลเดอร์และจำลองการกด ProximityPrompt
+local function checkProximityPrompts()
+    if katanaFragmentsFolder then
+        for _, filename in ipairs(filenamesToCheck) do
+            local item = katanaFragmentsFolder:FindFirstChild(filename)
+            
+            if item then
+                -- ตรวจสอบว่ามี ProximityPrompt ในออบเจ็กต์นั้นหรือไม่
+                local proximityPrompt = item:FindFirstChildOfClass("ProximityPrompt")
+                if proximityPrompt then
+                    print(filename .. " มี ProximityPrompt อยู่. จำลองการกด...")
+                    simulateProximityPrompt(proximityPrompt) -- เรียกใช้งานฟังก์ชันจำลองการกด
+                else
+                    print(filename .. " ไม่มี ProximityPrompt.")
+                end
+            else
+                print("ไม่พบ " .. filename .. " ในโฟลเดอร์ 'Katana Fragments'")
+            end
+        end
+    else
+        print("ไม่พบโฟลเดอร์ 'Katana Fragments'")
+    end
+end
+
+-- เรียกใช้ทั้งสองฟังก์ชันพร้อมกัน
+task.spawn(teleportToPositions)
+checkProximityPrompts()  -- เรียกใช้ฟังก์ชันตรวจสอบ ProximityPrompt
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "esp Katana parts",
+	Callback = function()
+
+        end  
+	})
+
+fackTab:AddButton({
+	Name = "auto kill Yuki (อย่าใช้ไม่หนุก)",
+	Callback = function()
+local yukiModel = workspace:FindFirstChild("Yuki")
+
+if yukiModel then
+    local humanoid = yukiModel:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        humanoid.Health = 0
+        print("Health of Humanoid in Yuki model set to 0.")
+    else
+        print("No Humanoid found in Yuki model.")
+    end
+else
+    print("Model Yuki not found in workspace.")
+end
+        end  
+	})
+
 OrionLib:Init()
