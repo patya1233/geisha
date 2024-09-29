@@ -335,11 +335,18 @@ if folder and folder:IsA("Folder") then
     local model = folder:FindFirstChild(modelName)
     if model and model:IsA("Model") then
         print("พบ Model 'TekeTeke' ในโฟลเดอร์ 'TekeTeke'")
-        
+
         -- ตรวจสอบว่ามี Humanoid ใน Model หรือไม่
         local humanoid = model:FindFirstChildOfClass("Humanoid")
         if humanoid then
             print("พบ Humanoid ใน Model 'TekeTeke'")
+
+            -- ตรวจสอบว่ามี Highlight อยู่แล้วหรือไม่ ถ้ามีให้ลบทิ้ง
+            local existingHighlight = model:FindFirstChildOfClass("Highlight")
+            if existingHighlight then
+                existingHighlight:Destroy()
+                print("ลบ Highlight ที่มีอยู่แล้ว")
+            end
 
             -- สร้าง Highlight ใหม่
             local highlight = Instance.new("Highlight")
@@ -356,14 +363,14 @@ if folder and folder:IsA("Folder") then
     end
 else
     print("ไม่พบโฟลเดอร์ 'TekeTeke' ใน Workspace")
-			end
+end
   	end  
 	})
 
 fackTab:AddButton({
 	Name = "esp note",
 	Callback = function()
-			-- ตรวจสอบโฟลเดอร์ CodeLocations ใน Workspace
+-- ตรวจสอบโฟลเดอร์ CodeLocations ใน Workspace
 local codeLocationsFolder = workspace:FindFirstChild("CodeLocations")
 
 -- ตรวจสอบว่าโฟลเดอร์ CodeLocations มีอยู่หรือไม่
@@ -372,6 +379,12 @@ if codeLocationsFolder then
     local noteCount = 0
     for _, item in pairs(codeLocationsFolder:GetChildren()) do
         if item.Name == "Note" then
+            -- ลบ Highlight ที่มีอยู่แล้ว (ถ้ามี)
+            local existingHighlight = item:FindFirstChild("Highlight")
+            if existingHighlight then
+                existingHighlight:Destroy()
+            end
+            
             -- ทำการไฮไลท์เป็นสีม่วง (Color3.fromRGB(128, 0, 128) คือสีม่วง)
             local highlight = Instance.new("Highlight")
             highlight.Parent = item
@@ -394,7 +407,7 @@ if codeLocationsFolder then
     end
 else
     print("ไม่พบโฟลเดอร์ CodeLocations ใน Workspace")
-			end
+end
   	end  
 	})
 
@@ -414,17 +427,20 @@ if axePositionFolder then
         -- ตรวจสอบว่ามี Highlight อยู่แล้วหรือไม่
         local existingHighlight = axeTool:FindFirstChildOfClass("Highlight")
         
-        if not existingHighlight then
-            -- ถ้ายังไม่มี Highlight ให้สร้างใหม่
-            local highlight = Instance.new("Highlight")
-            highlight.Parent = axeTool
-            highlight.FillColor = Color3.fromRGB(128, 0, 128) -- สีม่วง
-            highlight.OutlineColor = Color3.fromRGB(128, 0, 128) -- เส้นขอบสีม่วงเช่นกัน
-            
-            print("Highlight สีม่วงถูกเพิ่มลงใน Axe")
-        else
-            print("Axe มี Highlight อยู่แล้ว")
+        if existingHighlight then
+            -- ถ้ามี Highlight อันเก่าให้ลบทิ้ง
+            existingHighlight:Destroy()
+            print("ลบ Highlight อันเก่าแล้ว")
         end
+        
+        -- สร้าง Highlight ใหม่
+        local highlight = Instance.new("Highlight")
+        highlight.Parent = axeTool
+        highlight.FillColor = Color3.fromRGB(128, 0, 128) -- สีม่วง
+        highlight.OutlineColor = Color3.fromRGB(128, 0, 128) -- เส้นขอบสีม่วงเช่นกัน
+        
+        print("Highlight สีม่วงถูกเพิ่มลงใน Axe")
+        
     else
         print("ไม่พบ tool ชื่อ Axe ในโฟลเดอร์ AxePosition")
     end
@@ -441,7 +457,6 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "esp zombie",
 	Callback = function()
--- ตรวจสอบว่ามีโฟลเดอร์ Monsters อยู่ใน Workspace หรือไม่
 local monstersFolder = workspace:FindFirstChild("Monsters")
 
 if monstersFolder then
@@ -456,12 +471,20 @@ if monstersFolder then
             if humanoid then
                 print("โมเดล " .. model.Name .. " มี Humanoid")
 
+                -- ตรวจสอบว่ามี Highlight อันเก่าอยู่หรือไม่ ถ้ามีให้ลบทิ้งก่อน
+                local oldHighlight = model:FindFirstChild("Highlight")
+                if oldHighlight then
+                    oldHighlight:Destroy()
+                    print("ลบ Highlight อันเก่าในโมเดล " .. model.Name)
+                end
+
                 -- สร้าง Highlight ใหม่
                 local highlight = Instance.new("Highlight")
                 highlight.Parent = model
                 highlight.FillTransparency = 1 -- ทำให้ด้านในโปร่งใสทั้งหมด
                 highlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- ตั้งค่าสีเส้นขอบเป็นสีแดง
                 highlight.OutlineTransparency = 0 -- เส้นขอบไม่โปร่งใส
+                print("เพิ่ม Highlight ใหม่ให้โมเดล " .. model.Name)
             else
                 print("โมเดล " .. model.Name .. " ไม่มี Humanoid")
             end
@@ -492,6 +515,12 @@ if cageKeyFolder then
     for _, item in pairs(cageKeyFolder:GetChildren()) do
         if item:IsA("Tool") and item.Name == "CageKey" then
             count = count + 1
+
+            -- ตรวจสอบว่ามี Highlight อันเก่าอยู่หรือไม่
+            local oldHighlight = item:FindFirstChildOfClass("Highlight")
+            if oldHighlight then
+                oldHighlight:Destroy() -- ลบ Highlight อันเก่า
+            end
             
             -- สร้าง Highlight และตั้งค่าสีเขียว
             local highlight = Instance.new("Highlight")
