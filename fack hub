@@ -1725,9 +1725,6 @@ local function checkProximityPrompt()
     end
 end
 
--- เรียกใช้ฟังก์ชัน
-checkProximityPrompt()
-
 -- ฟังก์ชันจำลองการกด ProximityPrompt
 local function simulateProximityPrompt(proximityPrompt)
     if proximityPrompt and proximityPrompt:IsA("ProximityPrompt") then
@@ -1739,10 +1736,10 @@ local function simulateProximityPrompt(proximityPrompt)
     end
 end
 
--- ฟังก์ชันหลักที่จะทำงานเป็นเวลา 20 วินาที
+-- ฟังก์ชันหลักที่จะทำงานเป็นเวลา 10 วินาที
 local function runFor10Seconds()
     local totalTime = 0
-    local interval = 0  -- ตรวจสอบทุกๆ 1 วินาที
+    local interval = 1  -- ตรวจสอบทุกๆ 1 วินาที
 
     while totalTime < 10 do
         -- ตรวจสอบ Sickle1 ถึง Sickle5
@@ -1769,15 +1766,12 @@ local function runFor10Seconds()
     end
 end
 
--- เรียกใช้ฟังก์ชันหลัก
-runFor10Seconds()
-
+-- วาร์ปไปหา Sickle ตามลำดับและปรับมุมกล้อง
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
 local camera = game.Workspace.CurrentCamera
 
--- ฟังก์ชันเพื่อวาร์ปไปหา Sickle ตามลำดับและปรับมุมกล้อง
 local function warpToSickle(sickle)
     local sickleObject = game.Workspace:FindFirstChild(sickle)
     if sickleObject then
@@ -1791,11 +1785,23 @@ local function warpToSickle(sickle)
     end
 end
 
--- ลำดับการตรวจสอบ Sickle1 ถึง Sickle5
-for i = 1, 5 do
-    local sickleName = "Sickle" .. i
-    warpToSickle(sickleName)
+-- ฟังก์ชันหลักในการวาร์ปไป Sickle
+local function warpAndCheck()
+    for i = 1, 5 do
+        local sickleName = "Sickle" .. i
+        warpToSickle(sickleName)
+    end
 end
+
+-- เรียกใช้ฟังก์ชันตรวจสอบ ProximityPrompt
+checkProximityPrompt()
+
+-- เรียกใช้ฟังก์ชันหลักใน coroutine เพื่อให้ทำงานพร้อมกัน
+coroutine.wrap(runFor10Seconds)()
+coroutine.wrap(warpAndCheck)()
+
+-- ตัวอย่าง: คุณอาจต้องการให้ฟังก์ชัน checkProximityPrompt ทำงานในช่วงเดียวกัน
+coroutine.wrap(checkProximityPrompt)()
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.2287636, 12.9980259, 403.747498, 0.999955833, 1.79942159e-08, -0.00939891022, -1.86687537e-08, 1, -7.16799633e-08, 0.00939891022, 7.18522628e-08, 0.999955833)
         end  
