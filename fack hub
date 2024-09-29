@@ -16,7 +16,7 @@ local fackTab = Window:MakeTab({
 	})
 
 fackTab:AddButton({
-	Name = "Full Brightness",
+	Name = "Brightness",
 	Callback = function()
 			-- สคริปต์นี้จะทำให้เห็นชัดในที่มืด (Fulbright)
 
