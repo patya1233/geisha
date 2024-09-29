@@ -1766,11 +1766,11 @@ local function simulateProximityPrompt(proximityPrompt)
 end
 
 -- ฟังก์ชันหลักที่จะทำงานเป็นเวลา 20 วินาที
-local function runFor20Seconds()
+local function runFor10Seconds()
     local totalTime = 0
-    local interval = 1  -- ตรวจสอบทุกๆ 1 วินาที
+    local interval = 0  -- ตรวจสอบทุกๆ 1 วินาที
 
-    while totalTime < 20 do
+    while totalTime < 10 do
         -- ตรวจสอบ Sickle1 ถึง Sickle5
         for i = 1, 5 do
             local sickleName = "Sickle" .. i
@@ -1796,7 +1796,7 @@ local function runFor20Seconds()
 end
 
 -- เรียกใช้ฟังก์ชันหลัก
-runFor20Seconds()
+runFor10Seconds()
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.2287636, 12.9980259, 403.747498, 0.999955833, 1.79942159e-08, -0.00939891022, -1.86687537e-08, 1, -7.16799633e-08, 0.00939891022, 7.18522628e-08, 0.999955833)
         end  
