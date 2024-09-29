@@ -2362,7 +2362,7 @@ local positions = {
     CFrame.new(-657.912109, 7.07318687, -309.022125, 0.235294968, -1.12110548e-07, 0.971924007, 6.11672002e-09, 1, 1.13868282e-07, -0.971924007, -2.08476472e-08, 0.235294968)
 }
 
-local teleportDuration = 0.5 -- ระยะเวลาในการวาปไปยังตำแหน่งถัดไป (วินาที)
+local teleportDuration = 1 -- ระยะเวลาในการวาปไปยังตำแหน่งถัดไป (วินาที)
 local player = game.Players.LocalPlayer
 
 -- ฟังก์ชันสำหรับวาปไปยังตำแหน่งในลิสต์
@@ -2426,6 +2426,17 @@ checkProximityPrompts()  -- เรียกใช้ฟังก์ชันต�
 	})
 
 fackTab:AddButton({
+	Name = "tp to Build a katana",
+	Callback = function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-638.707031, 7.07318687, -232.800186, -0.531321645, 5.90033338e-08, -0.847170174, 1.39278438e-08, 1, 6.09123987e-08, 0.847170174, 2.05648227e-08, -0.531321645)
+        end  
+	})
+
+local Section = fackTab:AddSection({
+	Name = "esp Yuki"
+})
+
+fackTab:AddButton({
 	Name = "esp Katana parts",
 	Callback = function()
 -- เข้าถึง Workspace
@@ -2455,11 +2466,11 @@ if katanaFragmentsFolder then
     local function addESPText(object, partIndex)
         local espGui = Instance.new("BillboardGui")
         espGui.Adornee = object  -- ตั้งค่าให้ชี้ไปที่วัตถุ
-        espGui.Size = UDim2.new(1, 0, 1, 0)
+        espGui.Size = UDim2.new(0, 50, 0, 50)
         espGui.StudsOffset = Vector3.new(0, 2, 0)  -- ปรับตำแหน่งขึ้น
 
         local textLabel = Instance.new("TextLabel")
-        textLabel.Size = UDim2.new(1, 0, 1, 0)
+        textLabel.Size = UDim2.new(0, 50, 0, 50)
         textLabel.BackgroundTransparency = 1  -- ทำให้พื้นหลังโปร่งใส
         textLabel.TextColor3 = Color3.new(0, 1, 0)  -- ตัวอักษรสีเขียว
         textLabel.TextScaled = true  -- ปรับขนาดอัตโนมัติ
@@ -2488,6 +2499,10 @@ else
 end
         end  
 	})
+
+local Section = fackTab:AddSection({
+	Name = "auto kill"
+})
 
 fackTab:AddButton({
 	Name = "auto kill Yuki (อย่าใช้ไม่หนุก)",
