@@ -1728,56 +1728,75 @@ end
 -- เรียกใช้ฟังก์ชัน
 checkProximityPrompt()
 
--- สร้างฟังก์ชันเพื่อจำลองการกด ProximityPrompt
-local function simulateProximityPrompt(prompt)
-    if prompt then
-        print("Simulating ProximityPrompt for:", prompt.Parent.Name)
-        -- จำลองการเริ่มการกด ProximityPrompt
-        prompt:InputHoldBegin()
-        -- จำลองการหยุดการกด ProximityPrompt
-        prompt:InputHoldEnd()
+-- ตรวจสอบว่า Player อยู่ในเกมแล้วหรือยัง
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local camera = game.Workspace.CurrentCamera
+
+-- ฟังก์ชันเพื่อวาร์ปไปหา Sickle ตามลำดับและปรับมุมกล้อง
+local function warpToSickle(sickle)
+    local sickleObject = game.Workspace:FindFirstChild(sickle)
+    if sickleObject then
+        -- วาร์ปไปที่ตรงกลางของ Sickle โดยไม่เพิ่มแกน Y
+        humanoidRootPart.CFrame = sickleObject.CFrame
+
+        -- ปรับมุมกล้องให้หันลงไปที่พื้น
+        camera.CFrame = CFrame.new(humanoidRootPart.Position, humanoidRootPart.Position - Vector3.new(0, 1, 0))
+
+        wait(1) -- รอ 1 วินาทีก่อนที่จะตรวจสอบตัวต่อไป
     end
 end
 
--- รายการชื่อของ Sickle1 ถึง Sickle5
-local sickleList = {"Sickle1", "Sickle2", "Sickle3", "Sickle4", "Sickle5"}
+-- ลำดับการตรวจสอบ Sickle1 ถึง Sickle5
+for i = 1, 5 do
+    local sickleName = "Sickle" .. i
+    warpToSickle(sickleName)
+end
 
--- ตรวจสอบการมีอยู่ของ Sickle1 ถึง Sickle5 ใน workspace จนกว่าทั้งหมดจะถูกลบ
-while true do
-    local allRemoved = true -- ตัวแปรเพื่อตรวจสอบว่าทั้งหมดถูกลบแล้วหรือไม่
+-- ฟังก์ชันจำลองการกด ProximityPrompt
+local function simulateProximityPrompt(proximityPrompt)
+    if proximityPrompt and proximityPrompt:IsA("ProximityPrompt") then
+        -- สร้างการกด ProximityPrompt
+        proximityPrompt:InputHoldBegin()
+        wait(0.1)  -- ระยะเวลาจำลองการกด (อาจปรับได้ตามความเหมาะสม)
+        proximityPrompt:InputHoldEnd()
+        print("Simulated ProximityPrompt press for: " .. proximityPrompt.Parent.Name)
+    end
+end
 
-    -- วนลูปผ่านแต่ละ Sickle ในรายการ
-    for _, sickleName in pairs(sickleList) do
-        -- ค้นหาวัตถุใน workspace
-        local sickle = workspace:FindFirstChild(sickleName)
-        
-        -- หากพบวัตถุ
-        if sickle then
-            allRemoved = false -- อย่างน้อยมีวัตถุหนึ่งยังอยู่
-            -- ค้นหา ProximityPrompt ภายในวัตถุ
-            local proximityPrompt = sickle:FindFirstChildOfClass("ProximityPrompt")
-            
-            -- ถ้ามี ProximityPrompt ให้เรียกฟังก์ชันจำลองการกด
-            if proximityPrompt then
-                simulateProximityPrompt(proximityPrompt)
-                simulateProximityPrompt(prompt)
+-- ฟังก์ชันหลักที่จะทำงานเป็นเวลา 20 วินาที
+local function runFor20Seconds()
+    local totalTime = 0
+    local interval = 1  -- ตรวจสอบทุกๆ 1 วินาที
+
+    while totalTime < 20 do
+        -- ตรวจสอบ Sickle1 ถึง Sickle5
+        for i = 1, 5 do
+            local sickleName = "Sickle" .. i
+            local sickle = game.Workspace:FindFirstChild(sickleName)
+
+            if sickle then
+                local proximityPrompt = sickle:FindFirstChildOfClass("ProximityPrompt")
+
+                if proximityPrompt then
+                    print("ProximityPrompt found in: " .. sickleName)
+                    simulateProximityPrompt(proximityPrompt)
+                else
+                    print("No ProximityPrompt found in: " .. sickleName)
+                end
             else
-                print("No ProximityPrompt found in:", sickleName)
+                print(sickleName .. " not found in Workspace.")
             end
-        else
-            print("No object found with name:", sickleName)
         end
-    end
 
-    -- หากวัตถุทั้งหมดถูกลบออกแล้ว ให้ออกจากลูป
-    if allRemoved then
-        print("All Sickle objects have been removed.")
-        break
+        wait(interval)  -- รอ 1 วินาที
+        totalTime = totalTime + interval
     end
-    
-    -- รอเล็กน้อยก่อนที่จะวนลูปใหม่
-    wait(0)
 end
+
+-- เรียกใช้ฟังก์ชันหลัก
+runFor20Seconds()
 
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55.2287636, 12.9980259, 403.747498, 0.999955833, 1.79942159e-08, -0.00939891022, -1.86687537e-08, 1, -7.16799633e-08, 0.00939891022, 7.18522628e-08, 0.999955833)
         end  
