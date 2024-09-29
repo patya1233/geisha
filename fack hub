@@ -2428,7 +2428,64 @@ checkProximityPrompts()  -- เรียกใช้ฟังก์ชันต�
 fackTab:AddButton({
 	Name = "esp Katana parts",
 	Callback = function()
+-- เข้าถึง Workspace
+local workspace = game:GetService("Workspace")
 
+-- หาฟอลเดอร์ Katana Fragments
+local katanaFragmentsFolder = workspace:FindFirstChild("Katana Fragments")
+
+-- ตรวจสอบว่าฟอลเดอร์มีอยู่หรือไม่
+if katanaFragmentsFolder then
+    -- สร้างฟังก์ชันสำหรับการเพิ่ม Highlights
+    local function addHighlight(object)
+        local existingHighlight = object:FindFirstChildOfClass("Highlight")
+        if existingHighlight then
+            existingHighlight:Destroy()  -- ลบ Highlights เดิม
+        end
+        
+        -- สร้าง Highlight ใหม่
+        local highlight = Instance.new("Highlight")
+        highlight.Name = "GreenHighlight"
+        highlight.FillTransparency = 1
+        highlight.OutlineColor = Color3.new(0, 1, 0)  -- ขอบสีเขียว
+        highlight.Parent = object
+    end
+
+    -- สร้างฟังก์ชันสำหรับการเพิ่ม ESP Text
+    local function addESPText(object, partIndex)
+        local espGui = Instance.new("BillboardGui")
+        espGui.Adornee = object  -- ตั้งค่าให้ชี้ไปที่วัตถุ
+        espGui.Size = UDim2.new(1, 0, 1, 0)
+        espGui.StudsOffset = Vector3.new(0, 2, 0)  -- ปรับตำแหน่งขึ้น
+
+        local textLabel = Instance.new("TextLabel")
+        textLabel.Size = UDim2.new(1, 0, 1, 0)
+        textLabel.BackgroundTransparency = 1  -- ทำให้พื้นหลังโปร่งใส
+        textLabel.TextColor3 = Color3.new(0, 1, 0)  -- ตัวอักษรสีเขียว
+        textLabel.TextScaled = true  -- ปรับขนาดอัตโนมัติ
+        textLabel.Text = "Katana part " .. partIndex  -- ตั้งชื่อ
+
+        textLabel.Parent = espGui  -- เพิ่ม TextLabel ลงใน BillboardGui
+        espGui.Parent = object  -- เพิ่ม BillboardGui ลงในวัตถุ
+    end
+
+    -- รายชื่อวัตถุที่ต้องการเพิ่ม Highlight และ ESP Text
+    local itemsToHighlight = {"Blade.001", "Blade.006", "Cover.001"}
+    
+    -- วนลูปผ่านชื่อวัตถุที่ต้องการ
+    for i, itemName in ipairs(itemsToHighlight) do
+        local item = katanaFragmentsFolder:FindFirstChild(itemName)
+        if item then
+            addHighlight(item)  -- เพิ่ม Highlight ให้กับวัตถุที่พบ
+            addESPText(item, i)  -- เพิ่ม ESP Text ให้กับวัตถุ
+            print("Added highlight and ESP to " .. itemName)
+        else
+            print(itemName .. " not found in Katana Fragments.")
+        end
+    end
+else
+    print("Folder 'Katana Fragments' not found in Workspace.")
+end
         end  
 	})
 
