@@ -2507,7 +2507,7 @@ if katanaFragmentsFolder then
     local function addHighlight(object)
         local existingHighlight = object:FindFirstChildOfClass("Highlight")
         if existingHighlight then
-            existingHighlight:Destroy()  -- ลบ Highlights เดิม
+            existingHighlight:Destroy()  -- ลบ Highlight เดิม
         end
         
         -- สร้าง Highlight ใหม่
@@ -2520,6 +2520,12 @@ if katanaFragmentsFolder then
 
     -- สร้างฟังก์ชันสำหรับการเพิ่ม ESP Text
     local function addESPText(object, partIndex)
+        -- ตรวจสอบว่ามี BillboardGui เดิมอยู่หรือไม่
+        local existingESP = object:FindFirstChildOfClass("BillboardGui")
+        if existingESP then
+            existingESP:Destroy()  -- ลบ ESP Text เดิม
+        end
+
         local espGui = Instance.new("BillboardGui")
         espGui.Adornee = object  -- ตั้งค่าให้ชี้ไปที่วัตถุ
         espGui.Size = UDim2.new(0, 50, 0, 50)
