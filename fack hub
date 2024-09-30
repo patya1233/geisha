@@ -1561,7 +1561,11 @@ end
 
 local Section = fackTab:AddSection({
 	Name = "esp Mansion"
-        Callback = function()
+})
+
+fackTab:AddButton({
+	Name = "esp Geisha",
+	Callback = function()
 local workspace = game:GetService("Workspace") -- เข้าถึง Workspace
 
 -- ฟังก์ชันสำหรับเพิ่ม Highlight ให้กับ Humanoid
