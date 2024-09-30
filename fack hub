@@ -684,8 +684,6 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "esp Gashadokuro",
 	Callback = function()
--- สคริปต์เพื่อตรวจสอบไฟล์ใน Workspace ในโมเดลชื่อ Gashadokuro และเพิ่ม Highlight สีแดงให้กับ Humanoid
-
 -- ค้นหาโมเดล Gashadokuro ใน Workspace
 local model = workspace:FindFirstChild("Gashadokuro")
 
@@ -698,14 +696,24 @@ if model then
         if item:IsA("Humanoid") then
             print("พบ Humanoid:", item.Name)
 
+            -- ลบ Highlight อันเก่าถ้ามีอยู่ในโมเดล
+            for _, child in pairs(item.Parent:GetChildren()) do
+                if child:IsA("Highlight") then
+                    child:Destroy()  -- ลบ Highlight อันเก่า
+                    print("ลบ Highlight อันเดิม")
+                end
+            end
+
             -- สร้าง Highlight และตั้งค่า
             local highlight = Instance.new("Highlight")
             highlight.Parent = item.Parent -- Parent เป็นโมเดลที่มี Humanoid
             highlight.FillColor = Color3.new(1, 0, 0) -- สีแดง (RGB: 1, 0, 0)
             highlight.OutlineColor = Color3.new(1, 0, 0) -- สีแดง (สำหรับเส้นขอบ)
+            highlight.FillTransparency = 0.5 -- ปรับความโปร่งใสข้างใน (0 คือทึบ, 1 คือโปร่งใสเต็มที่)
+            highlight.OutlineTransparency = 0 -- ปรับความโปร่งใสเส้นขอบ (0 คือทึบ, 1 คือโปร่งใสเต็มที่)
             highlight.Enabled = true
 
-            print("เพิ่ม Highlight สีแดงให้กับ Humanoid")
+            print("เพิ่ม Highlight สีแดงและปรับความโปร่งใสให้กับ Humanoid")
         end
     end
 else
@@ -1448,13 +1456,18 @@ local Section = fackTab:AddSection({
 fackTab:AddButton({
 	Name = "esp fish and Wooden board",
 	Callback = function()
--- ฟังก์ชันสำหรับการเพิ่ม Highlight สีแดงให้กับ Humanoid พร้อมโปร่งใส่
 local function addHighlightToHumanoid(model)
     -- ค้นหา Humanoid ในโมเดล
     local humanoid = model:FindFirstChildOfClass("Humanoid")
     
     if humanoid then
-        -- สร้าง Highlight
+        -- ค้นหาและลบ Highlight อันเดิมถ้ามีอยู่
+        local existingHighlight = model:FindFirstChildOfClass("Highlight")
+        if existingHighlight then
+            existingHighlight:Destroy()
+        end
+
+        -- สร้าง Highlight ใหม่
         local highlight = Instance.new("Highlight")
         highlight.Parent = model
         highlight.FillColor = Color3.new(1, 0, 0) -- สีแดง (RGB: 1, 0, 0)
@@ -1464,6 +1477,23 @@ local function addHighlightToHumanoid(model)
     else
         print("ไม่พบ Humanoid ใน " .. model.Name)
     end
+end
+
+local function addHighlightToMeshPart(meshPart)
+    -- ค้นหาและลบ Highlight อันเดิมถ้ามีอยู่
+    local existingHighlight = meshPart:FindFirstChildOfClass("Highlight")
+    if existingHighlight then
+        existingHighlight:Destroy()
+    end
+    
+    -- สร้าง Highlight ใหม่
+    local highlight = Instance.new("Highlight")
+    highlight.Adornee = meshPart
+    highlight.FillTransparency = 1 -- ทำให้ข้างในโปร่งใส
+    highlight.OutlineColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
+    highlight.Parent = meshPart
+
+    print("เพิ่ม Highlight ให้กับ MeshPart: " .. meshPart.Name)
 end
 
 -- ตรวจสอบว่า Fish1 มีหรือไม่
@@ -1508,11 +1538,7 @@ if gameFolder then
                     print("พบ MeshPart: " .. item.Name)
 
                     -- เพิ่ม Highlight ให้กับ MeshPart
-                    local highlight = Instance.new("Highlight")
-                    highlight.Adornee = item
-                    highlight.FillTransparency = 1 -- ทำให้ข้างในโปร่งใส
-                    highlight.OutlineColor = Color3.fromRGB(0, 255, 0) -- สีเขียว
-                    highlight.Parent = item
+                    addHighlightToMeshPart(item)
                 end
             end
             
@@ -1535,13 +1561,7 @@ end
 
 local Section = fackTab:AddSection({
 	Name = "esp Mansion"
-})
-
-fackTab:AddButton({
-	Name = "esp Geisha",
-	Callback = function()
--- สคริปต์เพิ่ม Highlights ให้กับ Humanoid ในโมเดล Geisha ภายในโฟลเดอร์ Mansion
-
+        Callback = function()
 local workspace = game:GetService("Workspace") -- เข้าถึง Workspace
 
 -- ฟังก์ชันสำหรับเพิ่ม Highlight ให้กับ Humanoid
@@ -1555,13 +1575,21 @@ local function addHighlightToHumanoid()
             local humanoid = geishaModel:FindFirstChildOfClass("Humanoid") -- ค้นหา Humanoid ในโมเดล
 
             if humanoid then
-                -- สร้าง Highlight
+                -- ตรวจสอบว่ามี Highlight อยู่แล้วหรือไม่
+                local existingHighlight = geishaModel:FindFirstChild("Highlight")
+                
+                if existingHighlight then
+                    existingHighlight:Destroy() -- ลบ Highlight อันเดิมถ้ามี
+                    print("ลบ Highlight อันเก่า")
+                end
+                
+                -- สร้าง Highlight ใหม่
                 local highlight = Instance.new("Highlight")
                 highlight.Name = "Highlight"
                 highlight.Parent = geishaModel -- เพิ่ม Highlight ลงในโมเดล Geisha
                 highlight.FillColor = Color3.fromRGB(255, 0, 0) -- สีแดงอ่อน
                 highlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- สีแดง
-                highlight.OutlineTransparency = 0.5 -- ไม่โปร่งใส
+                highlight.OutlineTransparency = 0.8 -- ไม่โปร่งใส
 
                 print("เพิ่ม Highlight ให้กับ Humanoid ในโมเดล Geisha")
             else
